@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 // ** Icons Imports
@@ -10,6 +10,7 @@ import themeConfig from "@configs/themeConfig";
 
 // ** Utils
 import { getUserData, getHomeRouteForLoggedInUser } from "@utils";
+import { IS_LOGIN, USER_OBJECT } from "@src/router/RouteConstant";
 
 const VerticalMenuHeader = (props) => {
   // ** Props
@@ -28,7 +29,7 @@ const VerticalMenuHeader = (props) => {
   useEffect(() => {
     if (!menuHover && menuCollapsed) setGroupOpen([]);
   }, [menuHover, menuCollapsed]);
-
+  const [userStatus, setUserStatus] = useState(localStorage.getItem(IS_LOGIN))
   // ** Menu toggler component
   const Toggler = () => {
     if (!menuCollapsed) {
@@ -63,7 +64,7 @@ const VerticalMenuHeader = (props) => {
             <span className="brand-logo">
               <img src={themeConfig.app.appLogoImage} alt="logo" />
             </span>
-            {/*<h2 className="brand-text mb-0">{themeConfig.app.appName}</h2>*/}
+            <h2 className="brand-text mb-0">{themeConfig.app.appName}</h2>
           </NavLink>
         </li>
         <li className="nav-item nav-toggle">

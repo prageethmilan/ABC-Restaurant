@@ -172,6 +172,7 @@ const VerticalLayout = (props) => {
             navbarClasses[navbarType] || "floating-nav"
           } navbar-shadow`
         )}
+        style={{backgroundColor:`white`}}
       >
         <div className="navbar-container d-flex content">
           {navbar ? (
@@ -220,28 +221,28 @@ const VerticalLayout = (props) => {
           setMenuCollapsed={setMenuCollapsed}
         />
       ) : null}
-      {/*<footer*/}
-      {/*  className={classnames(*/}
-      {/*    `footer footer-light ${footerClasses[footerType] || "footer-static"}`,*/}
-      {/*    {*/}
-      {/*      "d-none": footerType === "hidden",*/}
-      {/*    }*/}
-      {/*  )}*/}
-      {/*>*/}
-      {/*  {footer ? (*/}
-      {/*    footer*/}
-      {/*  ) : (*/}
-      {/*    <FooterComponent*/}
-      {/*      footerType={footerType}*/}
-      {/*      footerClasses={footerClasses}*/}
-      {/*    />*/}
-      {/*  )}*/}
-      {/*</footer>*/}
+      {/*   <footer
+        className={classnames(
+          `footer footer-light ${footerClasses[footerType] || "footer-static"}`,
+          {
+            "d-none": footerType === "hidden",
+          }
+        )}
+      >
+        {footer ? (
+          footer
+        ) : (
+          <FooterComponent
+            footerType={footerType}
+            footerClasses={footerClasses}
+          />
+        )}
+      </footer>*/}
 
       {themeConfig.layout.scrollTop === true ? (
         <div className="scroll-to-top">
           <ScrollToTop showOffset={300} className="scroll-top d-block">
-            <Button className="btn-icon" color="primary">
+            <Button className="btn-icon" color="warning">
               <ArrowUp size={14} />
             </Button>
           </ScrollToTop>

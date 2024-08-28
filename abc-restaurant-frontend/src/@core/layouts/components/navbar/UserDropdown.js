@@ -20,6 +20,7 @@ import { UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem } from
 
 // ** Default Avatar Image
 import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
+import { USER_OBJECT } from "@src/router/RouteConstant"
 import { removeLocalStorageValues } from "@src/utility/commonFun"
 
 const UserDropdown = () => {
