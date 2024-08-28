@@ -17,6 +17,7 @@ import Footer from "@src/views/home/footer/footer"
 import { useRTL } from "@hooks/useRTL"
 import { useState } from "react"
 import logo from '@src/assets/images/logo/logo.png'
+import CarouselAutoPlay from "@src/views/home/CarouselAutoPlay";
 
 
 SwiperCore.use([Autoplay])
@@ -65,12 +66,12 @@ const Home = () => {
   return (
     <div className={"home_page"}>
       <div className="container-fluid banner-background">
-        {/*<Row className={"pt-5"}>*/}
-        {/*  <small className={'text-white text-center'}>DISCOVER THE SPICY MEALS EXPERIENCE, A CULINARY JOURNEY</small>*/}
-        {/*  <h1 className={"text-center text-white fw-bold"} style={{ fontSize: "7rem", fontWeight: "600" }}>Spicy*/}
-        {/*    Meals</h1>*/}
-        {/*  <h2 className={"text-center text-white"}> Let's Enjoy Favorite Restaurant Experience. </h2>*/}
-        {/*</Row>*/}
+        <Row className={"pt-5"}>
+          <small className={'text-white text-center'}>DISCOVER THE SPICY MEALS EXPERIENCE, A CULINARY JOURNEY</small>
+          <h1 className={"text-center text-white fw-bold"} style={{ fontSize: "7rem", fontWeight: "600" }}>Spicy
+            Meals</h1>
+          <h2 className={"text-center text-white"}> Let's Enjoy Favorite Restaurant Experience. </h2>
+        </Row>
         <Card className="custom-card">
           <h2 className={"text-center form_head mt-1"} style={{ fontWeight: 800 }}>Make Reservation</h2>
           <hr className={'me-2 ms-2'} />
@@ -179,7 +180,7 @@ const Home = () => {
           </Col>
           <Col md={7}>
             <Col sm="12">
-              {/*<CarouselAutoPlay isRtl={isRtl} />*/}
+              <CarouselAutoPlay isRtl={isRtl} />
             </Col>
           </Col>
         </Row>
@@ -192,7 +193,7 @@ const Home = () => {
           <h1 className={"pt-4 pb-4 text-center main_sub_header"}>Experience Culinary Elegance</h1>
         </Row>
         <Row>
-          {/*<Gallery />*/}
+          <Gallery />
         </Row>
       </div>
 

@@ -8,9 +8,6 @@ import NodeGlobalsPolyfillPlugin from '@esbuild-plugins/node-globals-polyfill'
 export default () => {
   return defineConfig({
     plugins: [react()],
-    define: {
-      global: 'globalThis'
-    },
     server: {
       port: 3000,
       proxy: 'https://pixinvent.com/',

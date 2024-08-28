@@ -1,15 +1,16 @@
 // ** Store Imports
-import { handleNavbarType } from "@store/layout";
+import { handleNavbarColor } from "@store/layout";
 import { useDispatch, useSelector } from "react-redux";
 
-export const useNavbarType = () => {
+export const useNavbarColor = () => {
   // ** Hooks
   const dispatch = useDispatch();
   const store = useSelector((state) => state.layout);
 
-  const setNavbarType = (type) => {
-    dispatch(handleNavbarType(type));
+  // ** Return a wrapped version of useState's setter function
+  const setNavbarColor = (value) => {
+    dispatch(handleNavbarColor(value));
   };
 
-  return { navbarType: store.navbarType, setNavbarType };
+  return { navbarColor: store.navbarColor, setNavbarColor };
 };

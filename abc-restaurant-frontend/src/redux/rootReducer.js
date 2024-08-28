@@ -1,7 +1,13 @@
 // ** Reducers Imports
-import layout from "./layout";
-import navbar from "./navbar";
+import layout from "./layout"
+import navbar from "./navbar"
+import routePath from "./routePath"
+import ecommerce from '@src/views/apps/ecommerce/store'
+const rootReducer = {
+  navbar,
+  layout,
+  routePath,
+  ecommerce
+}
 
-const rootReducer = { navbar, layout };
-
-export default rootReducer;
+export default rootReducer
