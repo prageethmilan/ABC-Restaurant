@@ -132,16 +132,16 @@ const HorizontalLayout = (props) => {
       >
         {!navbar && (
           <div className="navbar-header d-xl-block d-none">
-            <ul className="nav navbar-nav">
-              <NavItem>
-                <Link to="/" className="navbar-brand">
-                  <span className="brand-logo">
-                    <img src={themeConfig.app.appLogoImage} alt="logo" />
-                  </span>
-                  <h2 className="brand-text mb-0">{themeConfig.app.appName}</h2>
-                </Link>
-              </NavItem>
-            </ul>
+            {/*<ul className="nav navbar-nav">*/}
+            {/*  <NavItem>*/}
+            {/*    <Link to="/" className="navbar-brand">*/}
+            {/*      <span className="brand-logo">*/}
+            {/*        <img src={themeConfig.app.appLogoImage} alt="logo" />*/}
+            {/*      </span>*/}
+            {/*      <h2 className="brand-text mb-0">{themeConfig.app.appName}</h2>*/}
+            {/*    </Link>*/}
+            {/*  </NavItem>*/}
+            {/*</ul>*/}
           </div>
         )}
 
@@ -155,27 +155,27 @@ const HorizontalLayout = (props) => {
       </Navbar>
       {!isHidden ? (
         <div className="horizontal-menu-wrapper">
-          <Navbar
-            tag="div"
-            expand="sm"
-            light={skin !== "dark"}
-            dark={skin === "dark" || bgColorCondition}
-            className={classnames(
-              `header-navbar navbar-horizontal navbar-shadow menu-border`,
-              {
-                [navbarClasses[navbarType]]: navbarType !== "static",
-                "floating-nav":
-                  (!navbarClasses[navbarType] && navbarType !== "static") ||
-                  navbarType === "floating",
-              }
-            )}
-          >
-            {menu ? (
-              menu({ menuData, routerProps, currentActiveItem })
-            ) : (
-              <MenuComponent menuData={menuData} />
-            )}
-          </Navbar>
+          {/*<Navbar*/}
+          {/*  tag="div"*/}
+          {/*  expand="sm"*/}
+          {/*  light={skin !== "dark"}*/}
+          {/*  dark={skin === "dark" || bgColorCondition}*/}
+          {/*  className={classnames(*/}
+          {/*    `header-navbar navbar-horizontal navbar-shadow menu-border`,*/}
+          {/*    {*/}
+          {/*      [navbarClasses[navbarType]]: navbarType !== "static",*/}
+          {/*      "floating-nav":*/}
+          {/*        (!navbarClasses[navbarType] && navbarType !== "static") ||*/}
+          {/*        navbarType === "floating",*/}
+          {/*    }*/}
+          {/*  )}*/}
+          {/*>*/}
+          {/*  {menu ? (*/}
+          {/*    menu({ menuData, routerProps, currentActiveItem })*/}
+          {/*  ) : (*/}
+          {/*    <MenuComponent menuData={menuData} />*/}
+          {/*  )}*/}
+          {/*</Navbar>*/}
         </div>
       ) : null}
 
@@ -202,23 +202,23 @@ const HorizontalLayout = (props) => {
           setContentWidth={setContentWidth}
         />
       ) : null}
-      <footer
-        className={classnames(
-          `footer footer-light ${footerClasses[footerType] || "footer-static"}`,
-          {
-            "d-none": footerType === "hidden",
-          }
-        )}
-      >
-        {footer ? (
-          footer
-        ) : (
-          <FooterComponent
-            footerType={footerType}
-            footerClasses={footerClasses}
-          />
-        )}
-      </footer>
+      {/*<footer*/}
+      {/*  className={classnames(*/}
+      {/*    `footer footer-light ${footerClasses[footerType] || "footer-static"}`,*/}
+      {/*    {*/}
+      {/*      "d-none": footerType === "hidden",*/}
+      {/*    }*/}
+      {/*  )}*/}
+      {/*>*/}
+      {/*  {footer ? (*/}
+      {/*    footer*/}
+      {/*  ) : (*/}
+      {/*    <FooterComponent*/}
+      {/*      footerType={footerType}*/}
+      {/*      footerClasses={footerClasses}*/}
+      {/*    />*/}
+      {/*  )}*/}
+      {/*</footer>*/}
 
       {themeConfig.layout.scrollTop === true ? (
         <div className="scroll-to-top">

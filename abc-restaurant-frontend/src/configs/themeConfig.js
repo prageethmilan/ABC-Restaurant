@@ -1,13 +1,13 @@
 // Logo Import
-import logo from "@src/assets/images/logo/logo.svg";
+import logo from "@src/assets/images/logo/logo.png"
 
 // You can customize the template with the help of this file
 
 //Template config options
 const themeConfig = {
   app: {
-    appName: "Vuexy",
-    appLogoImage: logo,
+    appName: "ABC",
+    appLogoImage: logo
   },
   layout: {
     isRTL: false,

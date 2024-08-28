@@ -91,15 +91,15 @@ export const removeChildren = (children, openGroup, currentActiveGroup) => {
   });
 };
 
-const checkForVisibleChild = (arr, ability) => {
-  return arr.some((i) => {
-    if (i.children) {
-      return checkForVisibleChild(i.children, ability);
-    } else {
-      return ability.can(i.action, i.resource);
-    }
-  });
-};
+// const checkForVisibleChild = (arr, ability) => {
+//   return arr.some((i) => {
+//     if (i.children) {
+//       return checkForVisibleChild(i.children, ability);
+//     } else {
+//       return ability.can(i.action, i.resource);
+//     }
+//   });
+// };
 
 export const canViewMenuGroup = (item) => {
   const ability = useContext(AbilityContext);
