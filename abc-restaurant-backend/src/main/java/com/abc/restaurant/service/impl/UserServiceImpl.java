@@ -35,8 +35,7 @@ public class UserServiceImpl implements UserService {
     ModelMapper modelMapper;
 
     @Override
-    public void saveUser(UserDTO userDTO) {
-        System.out.println(userDTO.getUsername());
+    public void saveUser(UserDTO userDTO) throws UserException {
         log.info("Save user function starts : {}", userDTO);
         try {
             if (userDTO.getUsername().isEmpty())
@@ -60,7 +59,7 @@ public class UserServiceImpl implements UserService {
             log.info("User save process :{}", e.getMessage(), e);
             throw e;
         } catch (UserException e) {
-            throw new RuntimeException(e);
+            throw (e);
         }
     }
 }

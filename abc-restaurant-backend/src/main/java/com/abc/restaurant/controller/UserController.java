@@ -1,6 +1,7 @@
 package com.abc.restaurant.controller;
 
 import com.abc.restaurant.dto.UserDTO;
+import com.abc.restaurant.exception.UserException;
 import com.abc.restaurant.service.UserService;
 import com.abc.restaurant.util.common.CommonResponseUtil;
 import lombok.RequiredArgsConstructor;
@@ -21,15 +22,37 @@ public class UserController {
 
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CommonResponseUtil> registerUser(@ModelAttribute UserDTO userDTO) {
-        System.out.println(userDTO.getUsername());
-        userService.saveUser(userDTO);
-        return new ResponseEntity<>(
-                CommonResponseUtil.builder()
-                        .success(true)
-                        .msg("User registered successfully")
-                        .body(null)
-                        .build(),
-                HttpStatus.OK
-        );
+        try{
+            System.out.println(userDTO.getUsername());
+            userService.saveUser(userDTO);
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(true)
+                            .msg("User registered successfully")
+                            .body(null)
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (UserException e) {
+            System.out.println(e.getLocalizedMessage());
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(e.isSuccess())
+                            .msg(e.getMessage())
+                            .body(null)
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(false)
+                            .msg("An unexpected error occurred.")
+                            .body(null)
+                            .build(),
+                    HttpStatus.OK
+            );
+        }
     }
 }
