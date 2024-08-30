@@ -55,4 +55,16 @@ public class UserController {
             );
         }
     }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CommonResponseUtil> getAllUsers() {
+        return new ResponseEntity<>(
+                CommonResponseUtil.builder()
+                        .success(true)
+                        .msg("")
+                        .body(userService.getAllUsers())
+                        .build(),
+                HttpStatus.OK
+        );
+    }
 }

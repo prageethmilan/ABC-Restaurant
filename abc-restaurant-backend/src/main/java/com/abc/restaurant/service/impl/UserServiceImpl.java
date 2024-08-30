@@ -11,6 +11,7 @@ import com.abc.restaurant.util.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import java.util.Collections;
+import java.util.List;
 
 import static com.abc.restaurant.constant.Constants.INVALID;
 
@@ -61,5 +65,10 @@ public class UserServiceImpl implements UserService {
         } catch (UserException e) {
             throw (e);
         }
+    }
+
+    @Override
+    public List<UserDTO> getAllUsers() {
+        return modelMapper.map(userRepo.findAll(), new TypeToken<List<UserDTO>>(){}.getType());
     }
 }
