@@ -21,4 +21,6 @@ public interface UserService {
     List<UserDTO> getAllUsersByStatus(UserStatus status);
 
     void resetUserPassword(String email, int otp, String password) throws UserException;
+
+//    void sendUserOTP(String email);
 }

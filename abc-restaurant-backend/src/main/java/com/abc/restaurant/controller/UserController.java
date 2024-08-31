@@ -51,7 +51,7 @@ public class UserController {
                             .msg(e.getMessage())
                             .body(null)
                             .build(),
-                    HttpStatus.OK
+                    HttpStatus.NOT_FOUND
             );
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
@@ -61,7 +61,7 @@ public class UserController {
                             .msg("An unexpected error occurred.")
                             .body(null)
                             .build(),
-                    HttpStatus.OK
+                    HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
     }
@@ -128,7 +128,7 @@ public class UserController {
                             .msg("An unexpected error occurred.")
                             .body(null)
                             .build(),
-                    HttpStatus.NOT_FOUND
+                    HttpStatus.INTERNAL_SERVER_ERROR
             );
         } catch (UserException e) {
             return new ResponseEntity<>(
@@ -163,7 +163,7 @@ public class UserController {
                             .msg("An unexpected error occurred.")
                             .body(null)
                             .build(),
-                    HttpStatus.NOT_FOUND
+                    HttpStatus.INTERNAL_SERVER_ERROR
             );
         } catch (UserException e) {
             return new ResponseEntity<>(
@@ -205,7 +205,7 @@ public class UserController {
                             .msg("An unexpected error occurred.")
                             .body(null)
                             .build(),
-                    HttpStatus.NOT_FOUND
+                    HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
     }
@@ -227,7 +227,14 @@ public class UserController {
                     HttpStatus.OK
             );
         } catch (Exception e) {
-            throw e;
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(false)
+                            .msg("An unexpected error occurred.")
+                            .body(null)
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
         }
     }
 
@@ -259,7 +266,7 @@ public class UserController {
                             .msg("An unexpected error occurred.")
                             .body(null)
                             .build(),
-                    HttpStatus.NOT_FOUND
+                    HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
     }
@@ -292,14 +299,14 @@ public class UserController {
                             .msg("An unexpected error occurred.")
                             .body(null)
                             .build(),
-                    HttpStatus.NOT_FOUND
+                    HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
     }
 
 
     @PutMapping(value = "/reset-password", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CommonResponseUtil> resetUserPassword(@RequestBody(required = false) UserResetPasswordRequestDTO requestDTO, @RequestParam(value = "email", required = false) String email) {
+    public ResponseEntity<CommonResponseUtil> resetUserPassword(@RequestBody(required = false) UserResetPasswordRequestDTO requestDTO, @RequestParam(value = "email", required = false) String email) throws UserException {
         try {
             if (!email.trim().isEmpty())
                 return new ResponseEntity<>(
@@ -320,9 +327,45 @@ public class UserController {
                         HttpStatus.NOT_FOUND
                 );
             userService.resetUserPassword(email, requestDTO.getOtp(), requestDTO.getPassword());
-        } catch (Exception e) {
 
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(true)
+                            .msg("Password reset successfully")
+                            .body(null)
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (Exception e ) {
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(false)
+                            .msg("An unexpected error occurred.")
+                            .body(null)
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        } catch (UserException e) {
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(false)
+                            .msg(e.getMessage())
+                            .body(null)
+                            .build(),
+                    HttpStatus.NOT_FOUND
+            );
         }
-        return null;
     }
+
+//    @PostMapping(value = "/otp/send")
+//    public ResponseEntity<CommonResponseUtil> sendUserOTP(@RequestParam(value = "email") String email) {
+//        userService.sendUserOTP(email);
+//        return new ResponseEntity<>(
+//                CommonResponseUtil.builder()
+//                        .success(true)
+//                        .msg("OTP has been sent successfully to " + email)
+//                        .body(null)
+//                        .build()
+//                , HttpStatus.OK);
+//    }
 }

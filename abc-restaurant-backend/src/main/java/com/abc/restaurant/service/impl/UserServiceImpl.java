@@ -8,12 +8,15 @@ import com.abc.restaurant.entity.User;
 import com.abc.restaurant.enums.CommonStatus;
 import com.abc.restaurant.enums.UserRole;
 import com.abc.restaurant.enums.UserStatus;
+import com.abc.restaurant.exception.ApplicationException;
 import com.abc.restaurant.exception.UserException;
 import com.abc.restaurant.repository.AdminRepo;
 import com.abc.restaurant.repository.EmailPasswordResetOTPRepo;
 import com.abc.restaurant.repository.StaffRepo;
 import com.abc.restaurant.repository.UserRepo;
+import com.abc.restaurant.service.EmailService;
 import com.abc.restaurant.service.UserService;
+import com.abc.restaurant.util.OTPGenerator;
 import com.abc.restaurant.util.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -28,8 +31,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static com.abc.restaurant.constant.Constants.INVALID;
-import static com.abc.restaurant.constant.Constants.NOT_FOUND;
+import static com.abc.restaurant.constant.Constants.*;
 
 @Service
 @Transactional
@@ -37,6 +39,8 @@ import static com.abc.restaurant.constant.Constants.NOT_FOUND;
 @Log4j2
 public class UserServiceImpl implements UserService {
     private final Validator validator;
+    private final OTPGenerator otpGenerator;
+//    private final EmailService emailService;
 
     @Autowired
     AdminRepo adminRepo;
@@ -199,4 +203,26 @@ public class UserServiceImpl implements UserService {
             throw e;
         }
     }
+
+//    @Override
+//    public void sendUserOTP(String email) {
+//        try {
+//
+//            int OTP = otpGenerator.generateOTP();
+//            EmailPasswordResetOTP emailPasswordResetOTP = EmailPasswordResetOTP.builder().otp(String.valueOf(OTP)).email(email).build();
+//            emailPasswordResetOTPRepo.deleteAll(emailPasswordResetOTPRepo.findEmailPasswordResetOTPEntitiesByEmail(email));
+//            emailPasswordResetOTPRepo.save(emailPasswordResetOTP);
+//
+//            try {
+//                emailService.sendUserOTPEmail(UserDTO.builder()
+//                        .email(email)
+//                        .build(), OTP);
+//            } catch (Exception e) {
+//                throw new ApplicationException(COMMON_ERROR_CODE, false, "Unable to send OTP");
+//            }
+//
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//    }
 }
