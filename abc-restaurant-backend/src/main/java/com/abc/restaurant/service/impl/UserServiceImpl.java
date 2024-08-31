@@ -12,18 +12,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static com.abc.restaurant.constant.Constants.INVALID;
+import static com.abc.restaurant.constant.Constants.NOT_FOUND;
 
 @Service
 @Transactional
@@ -70,5 +69,36 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getAllUsers() {
         return modelMapper.map(userRepo.findAll(), new TypeToken<List<UserDTO>>(){}.getType());
+    }
+
+    @Override
+    public UserDTO getUserByUsernameOrEmail(String username, String email) throws UserException {
+        try {
+            Optional<User> user = Optional.empty();
+
+            // Determine which parameters are provided and query accordingly
+            if (username != null && !username.isEmpty() && email != null && !email.isEmpty()) {
+                // Both username and email are provided
+                user = userRepo.findUserByUsernameAndEmail(username, email);
+            } else if (username != null && !username.isEmpty()) {
+                // Only username is provided
+                user = userRepo.findUserByUsername(username);
+            } else if (email != null && !email.isEmpty()) {
+                // Only email is provided
+                user = userRepo.findUserByEmail(email);
+            }
+
+            // Convert User entity to UserDTO if found
+            if (user.isPresent())
+                return modelMapper.map(user.get(), UserDTO.class);
+
+            throw new UserException(NOT_FOUND, false, "Sorry, the user with the provided ID was not found in our records. Please check the ID and try again.");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw e;
+        } catch (UserException e) {
+            throw e;
+        }
     }
 }
