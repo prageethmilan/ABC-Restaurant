@@ -19,15 +19,15 @@ public class EmailPasswordResetOTP {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String otp;
+    private String otp;
 
-    String email;
+    private String email;
 
     @CreationTimestamp
     @Column(name = "created_date")
-    Date createdDate;
+    private Date createdDate;
 
     @Override
     public String toString() {

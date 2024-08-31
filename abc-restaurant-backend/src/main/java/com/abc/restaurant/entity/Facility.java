@@ -1,6 +1,8 @@
 package com.abc.restaurant.entity;
 
+import com.abc.restaurant.enums.CommonFunctionalFrequency;
 import com.abc.restaurant.enums.CommonStatus;
+import com.abc.restaurant.enums.FacilityType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,82 +23,83 @@ public class Facility {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String name;
+    private String name;
 
-    String imgURL;
+    private String imgURL;
 
     @Column(length = 1000)
-    String description;
+    private String description;
 
-//    @Enumerated(value = EnumType.STRING)
-//    @Column(name = "frequency", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'MONTHLY'")
-//    CommonFunctionalFrequency frequency;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "frequency", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'MONTHLY'")
+    private CommonFunctionalFrequency frequency;
 
     @Column(name = "reserved_date")
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    Date reservedDate;
+    private Date reservedDate;
 
-    String start;
+    private String start;
 
-    String close;
+    private String close;
 
     @Column(name = "week_days")
-    String weekDays;
+    private String weekDays;
 
     @Column(name = "max_participant_count")
-    Integer maxParticipantCount;
+    private Integer maxParticipantCount;
 
-    Float price;
+    private Float price;
 
-    Float discount;
+    private Float discount;
 
-//    @Column(name = "facility_type")
-//    @Enumerated(value = EnumType.STRING)
-//    FacilityType facilityType;
+    @Column(name = "facility_type")
+    @Enumerated(value = EnumType.STRING)
+    private FacilityType facilityType;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
-    Restaurant restaurant;
+    private Restaurant restaurant;
 
     @Column(name = "created_by")
-    Long createdBy;
+    private Long createdBy;
 
     @Column(name = "availability")
     @Enumerated(value = EnumType.STRING)
-    CommonStatus availability;
+    private CommonStatus availability;
 
     @Column(name = "created_date")
     @CreationTimestamp
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    Date createdDate;
+    private Date createdDate;
 
     @Column(name = "updated_date")
     @CreationTimestamp
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    Date updatedDate;
+    private Date updatedDate;
 
-//    @Override
-//    public String toString() {
-//        return "FacilityEntity{" +
-//                "name='" + name + '\'' +
-//                ", imgURL='" + imgURL + '\'' +
-//                ", description='" + description + '\'' +
-//                ", frequency=" + frequency +
-//                ", reservedDate=" + reservedDate +
-//                ", start='" + start + '\'' +
-//                ", close='" + close + '\'' +
-//                ", weekDays='" + weekDays + '\'' +
-//                ", maxParticipantCount=" + maxParticipantCount +
-//                ", price=" + price +
-//                ", discount=" + discount +
-//                ", facilityType=" + facilityType +
-//                ", restaurant=" + restaurant.id +
-//                ", createdBy=" + createdBy +
-//                ", availability=" + availability +
-//                ", createdDate=" + createdDate +
-//                ", updatedDate=" + updatedDate +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Facility{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", imgURL='" + imgURL + '\'' +
+                ", description='" + description + '\'' +
+                ", frequency=" + frequency +
+                ", reservedDate=" + reservedDate +
+                ", start='" + start + '\'' +
+                ", close='" + close + '\'' +
+                ", weekDays='" + weekDays + '\'' +
+                ", maxParticipantCount=" + maxParticipantCount +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", facilityType=" + facilityType +
+                ", restaurant=" + restaurant +
+                ", createdBy=" + createdBy +
+                ", availability=" + availability +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                '}';
+    }
 }

@@ -23,44 +23,44 @@ public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "email")
-    String email;
+    private String email;
 
     @Column(name = "phone")
-    String phone;
+    private String phone;
 
     @Column(name = "address")
-    String address;
+    private String address;
 
     @Column(name = "branch_code")
-    String branchCode;
+    private String branchCode;
 
     @OneToMany(mappedBy = "restaurant", cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
-    Set<Staff> staffEntities;
+    private Set<Staff> staffEntities;
 
     @OneToMany(mappedBy = "restaurant", cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
-    List<Facility> facilityEntities;
+    private List<Facility> facilityEntities;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'ACTIVE'")
-    CommonStatus status;
+    private CommonStatus status;
 
     @Column(name = "created_date")
     @CreationTimestamp
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    Date createdDate;
+    private Date createdDate;
 
     @Column(name = "updated_date")
     @CreationTimestamp
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    Date updatedDate;
+    private Date updatedDate;
 
     public Restaurant(String name, String email, String phone, String address, String branchCode, Set<Staff> staffEntities, CommonStatus status, Date createdDate, Date updatedDate) {
         this.name = name;

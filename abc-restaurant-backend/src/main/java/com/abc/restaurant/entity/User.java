@@ -21,32 +21,32 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    private Long id;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "username", nullable = false)
-    String username;
+    private String username;
 
     @Column(name = "email", nullable = false, unique = true)
-    String email;
+    private String email;
 
     @Column(name = "password", nullable = false)
-    String password;
+    private String password;
 
     @Column(name = "user_role", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    UserRole userRole;
+    private UserRole userRole;
 
     @Column(name = "user_status", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'ACTIVE'")
     @Enumerated(value = EnumType.STRING)
-    UserStatus userStatus;
+    private UserStatus userStatus;
 
     @Column(name = "created_date")
     @CreationTimestamp
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    Date createdDate;
+    private Date createdDate;
 
     public User(String name, String username, String email, String password, UserRole userRole, UserStatus userStatus) {
         this.name = name;
