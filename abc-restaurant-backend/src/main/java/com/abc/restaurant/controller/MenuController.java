@@ -35,7 +35,7 @@ public class MenuController {
                 CommonResponseUtil.builder()
                         .success(true)
                         .message("")
-                        .body(responseDTO)
+                        .data(responseDTO)
                         .build(),
                 HttpStatus.OK
         );
@@ -49,7 +49,7 @@ public class MenuController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("Menu item saved successfully")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -58,7 +58,7 @@ public class MenuController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -67,7 +67,7 @@ public class MenuController {
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -81,7 +81,7 @@ public class MenuController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("")
-                            .body(menuService.getMenuItemById(id))
+                            .data(menuService.getMenuItemById(id))
                             .build(),
                     HttpStatus.OK
             );
@@ -90,7 +90,7 @@ public class MenuController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -99,7 +99,7 @@ public class MenuController {
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );

@@ -11,5 +11,5 @@ import lombok.*;
 public class CommonResponseUtil {
     private boolean success;
     private String message;
-    private Object body;
+    private Object data;
 }

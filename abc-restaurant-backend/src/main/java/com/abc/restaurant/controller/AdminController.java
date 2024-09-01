@@ -28,7 +28,7 @@ public class AdminController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("Admin registered successfully!")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -37,7 +37,7 @@ public class AdminController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -46,7 +46,7 @@ public class AdminController {
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -59,7 +59,7 @@ public class AdminController {
                 CommonResponseUtil.builder()
                         .success(true)
                         .message("")
-                        .body(adminService.getAllAdminPortalUsers())
+                        .data(adminService.getAllAdminPortalUsers())
                         .build(),
                 HttpStatus.OK
         );
@@ -73,7 +73,7 @@ public class AdminController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("")
-                            .body(adminService.findAdminPortalUserByEmail(email))
+                            .data(adminService.findAdminPortalUserByEmail(email))
                             .build(),
                     HttpStatus.OK
             );
@@ -83,7 +83,7 @@ public class AdminController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -92,7 +92,7 @@ public class AdminController {
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );

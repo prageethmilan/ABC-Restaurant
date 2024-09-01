@@ -41,7 +41,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("User registered successfully")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -51,7 +51,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -61,7 +61,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -70,7 +70,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -88,7 +88,7 @@ public class UserController {
                 CommonResponseUtil.builder()
                         .success(true)
                         .message("")
-                        .body(userList)
+                        .data(userList)
                         .build(),
                 HttpStatus.OK
         );
@@ -102,7 +102,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("Either username or email must be provided")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.BAD_REQUEST
             );
@@ -118,7 +118,7 @@ public class UserController {
                         CommonResponseUtil.builder()
                                 .success(true)
                                 .message("User found")
-                                .body(dto)
+                                .data(dto)
                                 .build(),
                         HttpStatus.OK
                 );
@@ -127,7 +127,7 @@ public class UserController {
                         CommonResponseUtil.builder()
                                 .success(false)
                                 .message("User not found")
-                                .body(null)
+                                .data(null)
                                 .build(),
                         HttpStatus.NOT_FOUND
                 );
@@ -137,7 +137,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -146,7 +146,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.NOT_FOUND
             );
@@ -163,7 +163,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("")
-                            .body(userResponseDTO)
+                            .data(userResponseDTO)
                             .build(),
                     HttpStatus.OK
             );
@@ -172,7 +172,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -181,7 +181,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.NOT_FOUND
             );
@@ -196,7 +196,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("User deleted successfully")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -205,7 +205,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.NOT_FOUND
             );
@@ -214,7 +214,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -233,7 +233,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("operation successful")
-                            .body(users)
+                            .data(users)
                             .build(),
                     HttpStatus.OK
             );
@@ -242,7 +242,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -257,7 +257,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("User deactivated successfully")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -266,7 +266,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.NOT_FOUND
             );
@@ -275,7 +275,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -290,7 +290,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("User activated successfully")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -299,7 +299,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.NOT_FOUND
             );
@@ -308,7 +308,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -324,7 +324,7 @@ public class UserController {
                         CommonResponseUtil.builder()
                                 .success(false)
                                 .message("Please enter user email")
-                                .body(null)
+                                .data(null)
                                 .build(),
                         HttpStatus.NOT_FOUND
                 );
@@ -333,7 +333,7 @@ public class UserController {
                         CommonResponseUtil.builder()
                                 .success(false)
                                 .message("Please enter valid user email")
-                                .body(null)
+                                .data(null)
                                 .build(),
                         HttpStatus.NOT_FOUND
                 );
@@ -343,7 +343,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("Password reset successfully")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -352,7 +352,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -361,7 +361,7 @@ public class UserController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.NOT_FOUND
             );

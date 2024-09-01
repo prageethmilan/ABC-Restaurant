@@ -26,7 +26,7 @@ public class RestaurantController {
                 CommonResponseUtil.builder()
                         .success(true)
                         .message("")
-                        .body(restaurantService.getAllRestaurants())
+                        .data(restaurantService.getAllRestaurants())
                         .build(),
                 HttpStatus.OK
         );
@@ -38,7 +38,7 @@ public class RestaurantController {
                 CommonResponseUtil.builder()
                         .success(true)
                         .message("")
-                        .body(restaurantService.getAllRestaurantIds())
+                        .data(restaurantService.getAllRestaurantIds())
                         .build(),
                 HttpStatus.OK
         );
@@ -52,7 +52,7 @@ public class RestaurantController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("Restaurant saved successfully")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -61,7 +61,7 @@ public class RestaurantController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -70,7 +70,7 @@ public class RestaurantController {
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -84,7 +84,7 @@ public class RestaurantController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("")
-                            .body(restaurantService.getRestaurantById(id))
+                            .data(restaurantService.getRestaurantById(id))
                             .build(),
                     HttpStatus.OK
             );
@@ -93,7 +93,7 @@ public class RestaurantController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -102,7 +102,7 @@ public class RestaurantController {
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );

@@ -37,7 +37,7 @@ public class FacilityController {
                 CommonResponseUtil.builder()
                         .success(true)
                         .message("")
-                        .body(facilityService.getAllFacilities())
+                        .data(facilityService.getAllFacilities())
                         .build(),
                 HttpStatus.OK
         );
@@ -50,7 +50,7 @@ public class FacilityController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("")
-                            .body(facilityService.getFacilityById(id))
+                            .data(facilityService.getFacilityById(id))
                             .build(),
                     HttpStatus.OK
             );
@@ -59,7 +59,7 @@ public class FacilityController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -68,7 +68,7 @@ public class FacilityController {
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -129,7 +129,7 @@ public class FacilityController {
                     CommonResponseUtil.builder()
                             .success(true)
                             .message("Facility saved successfully")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
@@ -138,7 +138,7 @@ public class FacilityController {
                     CommonResponseUtil.builder()
                             .success(false)
                             .message("An unexpected error occurred.")
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -147,7 +147,7 @@ public class FacilityController {
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
                             .message(e.getMessage())
-                            .body(null)
+                            .data(null)
                             .build(),
                     HttpStatus.OK
             );
