@@ -2,7 +2,6 @@ package com.abc.restaurant.repository;
 
 import com.abc.restaurant.entity.User;
 import com.abc.restaurant.enums.UserStatus;
-import org.jboss.logging.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +13,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
     Optional<User> findUserByUsernameAndEmail(String username, String email);
     Optional<User> findUserByUsername(String username);
     Optional<User> findUserByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     List<User> findAllByUserStatus(UserStatus userStatus);
 
