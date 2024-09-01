@@ -1,4 +1,4 @@
-package com.abc.restaurant.util.request;
+package com.abc.restaurant.dto.request;
 
 
 import lombok.*;

@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
             if (userDTO.getPassword() == null || userDTO.getPassword().isEmpty() || !validator.isValidPassword(userDTO.getPassword()))
                 throw new UserException(INVALID, false, "Password must be at least 8 characters long and contain at least one number, one uppercase letter, one lowercase letter, and one special character (e.g., !@#$%^&*).");
 
-//            validateUniqueEmail(userDTO.getEmail());
+            validateUniqueEmail(userDTO.getEmail());
 
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
             userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
@@ -88,11 +88,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-//    private void validateUniqueEmail(String email) {
-//        if (adminRepo.findByEmail(email).isPresent() || staffRepo.findByEmail(email).isPresent() || userRepo.findByEmail(email).isPresent()) {
-//            throw new ApplicationServiceException(200, false, "Email is already in use");
-//        }
-//    }
+    private void validateUniqueEmail(String email) {
+        if (adminRepo.findByEmail(email).isPresent() || staffRepo.findByEmail(email).isPresent() || userRepo.findUserByEmail(email).isPresent()) {
+            throw new ApplicationException(200, false, "Email is already in use");
+        }
+    }
 
     @Override
     public List<UserDTO> getAllUsers() {

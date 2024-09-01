@@ -2,7 +2,7 @@ package com.abc.restaurant.repository;
 
 import com.abc.restaurant.entity.Staff;
 import com.abc.restaurant.enums.CommonStatus;
-import com.abc.restaurant.util.response.AdminStaffCommonResponseDTO;
+import com.abc.restaurant.dto.response.AdminStaffCommonResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

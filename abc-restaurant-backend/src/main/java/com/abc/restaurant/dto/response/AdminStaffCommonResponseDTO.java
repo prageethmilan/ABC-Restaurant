@@ -1,4 +1,4 @@
-package com.abc.restaurant.util.response;
+package com.abc.restaurant.dto.response;
 
 
 import com.abc.restaurant.enums.CommonStatus;

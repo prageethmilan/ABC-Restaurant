@@ -5,8 +5,8 @@ import com.abc.restaurant.enums.UserStatus;
 import com.abc.restaurant.exception.UserException;
 import com.abc.restaurant.service.UserService;
 import com.abc.restaurant.util.common.CommonResponseUtil;
-import com.abc.restaurant.util.request.UserResetPasswordRequestDTO;
-import com.abc.restaurant.util.response.UserResponseDTO;
+import com.abc.restaurant.dto.request.UserResetPasswordRequestDTO;
+import com.abc.restaurant.dto.response.UserResponseDTO;
 import com.abc.restaurant.util.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
