@@ -40,7 +40,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("User registered successfully")
+                            .message("User registered successfully")
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -50,7 +50,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -60,7 +60,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -69,7 +69,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -87,7 +87,7 @@ public class UserController {
         return new ResponseEntity<>(
                 CommonResponseUtil.builder()
                         .success(true)
-                        .msg("")
+                        .message("")
                         .body(userList)
                         .build(),
                 HttpStatus.OK
@@ -101,7 +101,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("Either username or email must be provided")
+                            .message("Either username or email must be provided")
                             .body(null)
                             .build(),
                     HttpStatus.BAD_REQUEST
@@ -117,7 +117,7 @@ public class UserController {
                 return new ResponseEntity<>(
                         CommonResponseUtil.builder()
                                 .success(true)
-                                .msg("User found")
+                                .message("User found")
                                 .body(dto)
                                 .build(),
                         HttpStatus.OK
@@ -126,7 +126,7 @@ public class UserController {
                 return new ResponseEntity<>(
                         CommonResponseUtil.builder()
                                 .success(false)
-                                .msg("User not found")
+                                .message("User not found")
                                 .body(null)
                                 .build(),
                         HttpStatus.NOT_FOUND
@@ -136,7 +136,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -145,7 +145,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.NOT_FOUND
@@ -162,7 +162,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("")
+                            .message("")
                             .body(userResponseDTO)
                             .build(),
                     HttpStatus.OK
@@ -171,7 +171,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -180,7 +180,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.NOT_FOUND
@@ -195,7 +195,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("User deleted successfully")
+                            .message("User deleted successfully")
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -204,7 +204,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.NOT_FOUND
@@ -213,7 +213,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -232,7 +232,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("operation successful")
+                            .message("operation successful")
                             .body(users)
                             .build(),
                     HttpStatus.OK
@@ -241,7 +241,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -256,7 +256,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("User deactivated successfully")
+                            .message("User deactivated successfully")
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -265,7 +265,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.NOT_FOUND
@@ -274,7 +274,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -289,7 +289,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("User activated successfully")
+                            .message("User activated successfully")
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -298,7 +298,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.NOT_FOUND
@@ -307,7 +307,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -323,7 +323,7 @@ public class UserController {
                 return new ResponseEntity<>(
                         CommonResponseUtil.builder()
                                 .success(false)
-                                .msg("Please enter user email")
+                                .message("Please enter user email")
                                 .body(null)
                                 .build(),
                         HttpStatus.NOT_FOUND
@@ -332,7 +332,7 @@ public class UserController {
                 return new ResponseEntity<>(
                         CommonResponseUtil.builder()
                                 .success(false)
-                                .msg("Please enter valid user email")
+                                .message("Please enter valid user email")
                                 .body(null)
                                 .build(),
                         HttpStatus.NOT_FOUND
@@ -342,7 +342,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("Password reset successfully")
+                            .message("Password reset successfully")
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -351,7 +351,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -360,7 +360,7 @@ public class UserController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.NOT_FOUND

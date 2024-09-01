@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ResponseDTO <T>{
     private boolean success;
-    private String msg;
+    private String message;
     private T body;
 }

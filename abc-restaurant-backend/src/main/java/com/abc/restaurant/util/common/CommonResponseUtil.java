@@ -10,6 +10,6 @@ import lombok.*;
 @Builder
 public class CommonResponseUtil {
     private boolean success;
-    private String msg;
+    private String message;
     private Object body;
 }

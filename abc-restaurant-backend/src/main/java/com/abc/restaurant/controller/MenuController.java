@@ -34,7 +34,7 @@ public class MenuController {
         return new ResponseEntity<>(
                 CommonResponseUtil.builder()
                         .success(true)
-                        .msg("")
+                        .message("")
                         .body(responseDTO)
                         .build(),
                 HttpStatus.OK
@@ -48,7 +48,7 @@ public class MenuController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("Menu item saved successfully")
+                            .message("Menu item saved successfully")
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -57,7 +57,7 @@ public class MenuController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -66,7 +66,7 @@ public class MenuController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -80,7 +80,7 @@ public class MenuController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("")
+                            .message("")
                             .body(menuService.getMenuItemById(id))
                             .build(),
                     HttpStatus.OK
@@ -89,7 +89,7 @@ public class MenuController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -98,7 +98,7 @@ public class MenuController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.OK

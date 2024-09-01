@@ -36,7 +36,7 @@ public class FacilityController {
         return new ResponseEntity<>(
                 CommonResponseUtil.builder()
                         .success(true)
-                        .msg("")
+                        .message("")
                         .body(facilityService.getAllFacilities())
                         .build(),
                 HttpStatus.OK
@@ -49,7 +49,7 @@ public class FacilityController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("")
+                            .message("")
                             .body(facilityService.getFacilityById(id))
                             .build(),
                     HttpStatus.OK
@@ -58,7 +58,7 @@ public class FacilityController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -67,7 +67,7 @@ public class FacilityController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -128,7 +128,7 @@ public class FacilityController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("Facility saved successfully")
+                            .message("Facility saved successfully")
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -137,7 +137,7 @@ public class FacilityController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -146,7 +146,7 @@ public class FacilityController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.OK

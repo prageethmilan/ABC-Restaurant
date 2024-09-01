@@ -27,7 +27,7 @@ public class AdminController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("Admin registered successfully!")
+                            .message("Admin registered successfully!")
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -36,7 +36,7 @@ public class AdminController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -45,7 +45,7 @@ public class AdminController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.OK
@@ -58,7 +58,7 @@ public class AdminController {
         return new ResponseEntity<>(
                 CommonResponseUtil.builder()
                         .success(true)
-                        .msg("")
+                        .message("")
                         .body(adminService.getAllAdminPortalUsers())
                         .build(),
                 HttpStatus.OK
@@ -72,7 +72,7 @@ public class AdminController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("")
+                            .message("")
                             .body(adminService.findAdminPortalUserByEmail(email))
                             .build(),
                     HttpStatus.OK
@@ -82,7 +82,7 @@ public class AdminController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
-                            .msg("An unexpected error occurred.")
+                            .message("An unexpected error occurred.")
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -91,7 +91,7 @@ public class AdminController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
-                            .msg(e.getMessage())
+                            .message(e.getMessage())
                             .body(null)
                             .build(),
                     HttpStatus.OK
