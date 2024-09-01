@@ -73,11 +73,17 @@ public class FacilityController {
             @RequestParam("availability") CommonStatus availability
     ) throws IOException {
         try{
-            String projectPath = String.valueOf(new File("E:\\Github Projects\\ABC-Restaurant\\abc-restaurant-frontend\\savedImages"));
-            File uploadsDir = new File(projectPath + "\\Facility");
-            uploadsDir.mkdir();
-            img.transferTo(new File(uploadsDir.getAbsolutePath() + "\\" + img.getOriginalFilename()));
-            String imgURL = projectPath + "\\Facility\\" + img.getOriginalFilename().replace("", "_") + "_" + new Date().getTime();
+
+            String imgURL;
+            if (!img.isEmpty()){
+                String projectPath = String.valueOf(new File("E:\\Github Projects\\ABC-Restaurant\\abc-restaurant-frontend\\savedImages"));
+                File uploadsDir = new File(projectPath + "\\Facility");
+                uploadsDir.mkdir();
+                img.transferTo(new File(uploadsDir.getAbsolutePath() + "\\" + img.getOriginalFilename()));
+                imgURL = projectPath + "\\Facility\\" + img.getOriginalFilename().replace("", "_") + "_" + new Date().getTime();
+            } else {
+                imgURL = null;
+            }
 
             SaveFacilityReqDTO saveFacilityReqDTO = SaveFacilityReqDTO.builder()
                     .id(id)
