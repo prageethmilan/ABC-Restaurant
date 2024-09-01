@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ApplicationException extends RuntimeException {
+public class ApplicationException extends Throwable {
 
     private int status;
     private boolean success;

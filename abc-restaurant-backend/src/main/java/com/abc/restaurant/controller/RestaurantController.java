@@ -1,9 +1,8 @@
 package com.abc.restaurant.controller;
 
-import com.abc.restaurant.dto.request.SaveMenuItemRequestDTO;
-import com.abc.restaurant.dto.response.MenuItemFilterResponseDTO;
+import com.abc.restaurant.dto.request.SaveRestaurantRequestDTO;
 import com.abc.restaurant.exception.ApplicationException;
-import com.abc.restaurant.service.MenuService;
+import com.abc.restaurant.service.RestaurantService;
 import com.abc.restaurant.util.common.CommonResponseUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,48 +11,52 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/v1/meal")
+@RequestMapping("/v1/restaurant")
 @RequiredArgsConstructor
-public class MenuController {
+public class RestaurantController {
 
     @Autowired
-    private MenuService menuService;
-
+    private RestaurantService restaurantService;
 
     @GetMapping
-    public ResponseEntity<CommonResponseUtil> getAllMenus(){
-        MenuItemFilterResponseDTO responseDTO = MenuItemFilterResponseDTO.builder()
-                .restaurantId(0L)
-                .meals(menuService.getAllMenus())
-                .build();
-
+    public ResponseEntity<CommonResponseUtil> getAllRestaurants(){
         return new ResponseEntity<>(
                 CommonResponseUtil.builder()
                         .success(true)
                         .msg("")
-                        .body(responseDTO)
+                        .body(restaurantService.getAllRestaurants())
                         .build(),
                 HttpStatus.OK
         );
     }
 
-    @PostMapping(value = "/product", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CommonResponseUtil> saveMenuItem(@ModelAttribute SaveMenuItemRequestDTO saveMenuItemRequestDTO) throws IOException {
+    @GetMapping(value = "/branches")
+    public ResponseEntity<CommonResponseUtil> getAllRestaurantIds(){
+        return new ResponseEntity<>(
+                CommonResponseUtil.builder()
+                        .success(true)
+                        .msg("")
+                        .body(restaurantService.getAllRestaurantIds())
+                        .build(),
+                HttpStatus.OK
+        );
+    }
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CommonResponseUtil> saveRestaurant(@RequestBody SaveRestaurantRequestDTO saveRestaurantRequestDTO){
         try {
-            menuService.saveMenuItem(saveMenuItemRequestDTO);
+            restaurantService.saveRestaurant(saveRestaurantRequestDTO);
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .msg("Menu item saved successfully")
+                            .msg("Restaurant saved successfully")
                             .body(null)
                             .build(),
                     HttpStatus.OK
             );
-        } catch (Exception e) {
+        } catch (Exception e){
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(false)
@@ -74,14 +77,14 @@ public class MenuController {
         }
     }
 
-    @GetMapping(value = "/product/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CommonResponseUtil> getMenuItemById(@PathVariable Long id){
+    @GetMapping(value = "/branch/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CommonResponseUtil> getRestaurantById(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
                             .msg("")
-                            .body(menuService.getMenuItemById(id))
+                            .body(restaurantService.getRestaurantById(id))
                             .build(),
                     HttpStatus.OK
             );

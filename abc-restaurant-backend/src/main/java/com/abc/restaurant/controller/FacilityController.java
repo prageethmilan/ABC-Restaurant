@@ -4,6 +4,7 @@ import com.abc.restaurant.dto.request.SaveFacilityReqDTO;
 import com.abc.restaurant.enums.CommonFunctionalFrequency;
 import com.abc.restaurant.enums.CommonStatus;
 import com.abc.restaurant.enums.FacilityType;
+import com.abc.restaurant.exception.ApplicationException;
 import com.abc.restaurant.service.FacilityService;
 import com.abc.restaurant.util.common.CommonResponseUtil;
 import lombok.RequiredArgsConstructor;
@@ -44,14 +45,34 @@ public class FacilityController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CommonResponseUtil> getFacilityById(@PathVariable Long id){
-        return new ResponseEntity<>(
-                CommonResponseUtil.builder()
-                        .success(true)
-                        .msg("")
-                        .body(facilityService.getFacilityById(id))
-                        .build(),
-                HttpStatus.OK
-        );
+        try {
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(true)
+                            .msg("")
+                            .body(facilityService.getFacilityById(id))
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(false)
+                            .msg("An unexpected error occurred.")
+                            .body(null)
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        } catch (ApplicationException e) {
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(e.isSuccess())
+                            .msg(e.getMessage())
+                            .body(null)
+                            .build(),
+                    HttpStatus.OK
+            );
+        }
     }
 
     @PostMapping(value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -113,7 +134,23 @@ public class FacilityController {
                     HttpStatus.OK
             );
         } catch (Exception e) {
-            throw e;
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(false)
+                            .msg("An unexpected error occurred.")
+                            .body(null)
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        } catch (ApplicationException e) {
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(e.isSuccess())
+                            .msg(e.getMessage())
+                            .body(null)
+                            .build(),
+                    HttpStatus.OK
+            );
         }
     }
 }

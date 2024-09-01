@@ -44,7 +44,7 @@ public class AdminServiceImpl implements AdminService {
     private RestaurantRepo restaurantRepo;
 
     @Override
-    public void saveAdmin(SaveAdminRequestDTO saveAdminRequestDTO) {
+    public void saveAdmin(SaveAdminRequestDTO saveAdminRequestDTO) throws ApplicationException {
         try {
             if (saveAdminRequestDTO.getId() == 0) {
                 validateUniqueEmail(saveAdminRequestDTO.getEmail());
@@ -138,10 +138,12 @@ public class AdminServiceImpl implements AdminService {
             }
         } catch (Exception e) {
             throw e;
+        } catch (ApplicationException e) {
+            throw e;
         }
     }
 
-    private void validateUniqueEmail(String email) {
+    private void validateUniqueEmail(String email) throws ApplicationException {
         if (adminRepo.findByEmail(email).isPresent() || staffRepo.findByEmail(email).isPresent() || userRepo.findUserByEmail(email).isPresent()){
             throw new ApplicationException(200, false, "Email is already in use.");
         }
@@ -164,7 +166,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Object findAdminPortalUserByEmail(String email) {
+    public Object findAdminPortalUserByEmail(String email) throws ApplicationException {
         try {
             Optional<Admin> admin = adminRepo.findByEmail(email);
             if (admin.isPresent()) {
@@ -178,6 +180,8 @@ public class AdminServiceImpl implements AdminService {
 
             throw new ApplicationException(404, false, "User not found!");
         } catch (Exception e) {
+            throw e;
+        } catch (ApplicationException e) {
             throw e;
         }
     }

@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     ModelMapper modelMapper;
 
     @Override
-    public void saveUser(UserDTO userDTO) throws UserException {
+    public void saveUser(UserDTO userDTO) throws UserException, ApplicationException {
         log.info("Save user function starts : {}", userDTO);
         try {
             if (userDTO.getUsername().isEmpty())
@@ -85,10 +85,12 @@ public class UserServiceImpl implements UserService {
             throw e;
         } catch (UserException e) {
             throw (e);
+        } catch (ApplicationException e) {
+            throw e;
         }
     }
 
-    private void validateUniqueEmail(String email) {
+    private void validateUniqueEmail(String email) throws ApplicationException {
         if (adminRepo.findByEmail(email).isPresent() || staffRepo.findByEmail(email).isPresent() || userRepo.findUserByEmail(email).isPresent()) {
             throw new ApplicationException(200, false, "Email is already in use");
         }

@@ -14,7 +14,7 @@ public class OTPGenerator {
 
     private final Random random = new Random();
 
-    public int generateOTP() {
+    public int generateOTP() throws ApplicationException {
         try {
             return random.nextInt(9000) + 1000;
         } catch (Exception e) {

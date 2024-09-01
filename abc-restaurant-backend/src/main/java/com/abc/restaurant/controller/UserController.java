@@ -2,6 +2,7 @@ package com.abc.restaurant.controller;
 
 import com.abc.restaurant.dto.UserDTO;
 import com.abc.restaurant.enums.UserStatus;
+import com.abc.restaurant.exception.ApplicationException;
 import com.abc.restaurant.exception.UserException;
 import com.abc.restaurant.service.UserService;
 import com.abc.restaurant.util.common.CommonResponseUtil;
@@ -32,7 +33,9 @@ public class UserController {
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CommonResponseUtil> registerUser(@ModelAttribute UserDTO userDTO) {
         try{
-            System.out.println(userDTO.getUsername());
+            System.out.println(userDTO.toString());
+            System.out.println("User save process");
+
             userService.saveUser(userDTO);
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
@@ -50,7 +53,7 @@ public class UserController {
                             .msg(e.getMessage())
                             .body(null)
                             .build(),
-                    HttpStatus.NOT_FOUND
+                    HttpStatus.OK
             );
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
@@ -61,6 +64,15 @@ public class UserController {
                             .body(null)
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        } catch (ApplicationException e) {
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(e.isSuccess())
+                            .msg(e.getMessage())
+                            .body(null)
+                            .build(),
+                    HttpStatus.OK
             );
         }
     }

@@ -2,13 +2,14 @@ package com.abc.restaurant.service;
 
 import com.abc.restaurant.dto.UserDTO;
 import com.abc.restaurant.enums.UserStatus;
+import com.abc.restaurant.exception.ApplicationException;
 import com.abc.restaurant.exception.UserException;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    void saveUser(UserDTO userDTO) throws UserException;
+    void saveUser(UserDTO userDTO) throws UserException, ApplicationException;
 
     List<UserDTO> getAllUsers();
 

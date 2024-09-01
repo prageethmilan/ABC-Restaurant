@@ -44,7 +44,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public void saveMenuItem(SaveMenuItemRequestDTO saveMenuItemRequestDTO) throws IOException {
+    public void saveMenuItem(SaveMenuItemRequestDTO saveMenuItemRequestDTO) throws IOException, ApplicationException {
         try {
             Optional<Restaurant> restaurant = restaurantRepo.findById(saveMenuItemRequestDTO.getRestaurantId());
             if (!restaurant.isPresent() || restaurant.get().getStatus().equals(CommonStatus.DELETED)){
@@ -108,11 +108,13 @@ public class MenuServiceImpl implements MenuService {
             }
         } catch (Exception e) {
             throw e;
+        } catch (ApplicationException e) {
+            throw e;
         }
     }
 
     @Override
-    public Object getMenuItemById(Long id) {
+    public Object getMenuItemById(Long id) throws ApplicationException {
         try {
             Optional<MenuItem> menuItem = menuRepo.findById(id);
 
@@ -122,6 +124,8 @@ public class MenuServiceImpl implements MenuService {
 
             throw new ApplicationException(404, false, "Meal not found");
         } catch (Exception e) {
+            throw e;
+        } catch (ApplicationException e) {
             throw e;
         }
     }

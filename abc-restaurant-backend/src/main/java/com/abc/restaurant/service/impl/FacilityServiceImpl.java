@@ -44,7 +44,7 @@ public class FacilityServiceImpl implements FacilityService {
     }
 
     @Override
-    public Object getFacilityById(Long id) {
+    public Object getFacilityById(Long id) throws ApplicationException {
         try{
             Optional<Facility> facility = facilityRepo.findById(id);
 
@@ -55,11 +55,13 @@ public class FacilityServiceImpl implements FacilityService {
             throw new ApplicationException(200, false, "Facility not found!");
         } catch (Exception e) {
             throw e;
+        } catch (ApplicationException e) {
+            throw e;
         }
     }
 
     @Override
-    public void saveFacility(SaveFacilityReqDTO saveFacilityReqDTO) {
+    public void saveFacility(SaveFacilityReqDTO saveFacilityReqDTO) throws ApplicationException {
         try{
             Optional<Restaurant> restaurant = restaurantRepo.findById(saveFacilityReqDTO.getRestaurantId());
             if (!restaurant.isPresent() || restaurant.get().getStatus().equals(CommonStatus.DELETED)){
@@ -120,6 +122,8 @@ public class FacilityServiceImpl implements FacilityService {
                 facilityRepo.save(existingFacility);
             }
         } catch (Exception e) {
+            throw e;
+        } catch (ApplicationException e) {
             throw e;
         }
     }
