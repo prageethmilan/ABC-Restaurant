@@ -14,5 +14,5 @@ public class OAuth2Constants {
     public static final String TRUST = "trust";
     public static final int ACCESS_TOKEN_VALIDITY_SECONDS = 60 * 60 * 24 * 30;
     public static final int REFRESH_TOKEN_VALIDITY_SECONDS = 60 * 60 * 24 * 30;
-    public static final String TOKEN_SIGN_IN_KEY = "D0HE63E26R556A5K6E3A72357538782F413F4D28H7EB4BE250R45A675K6BA970";
+    public static final String TOKEN_SIGN_IN_KEY = "QUJDLVJlc3RhdXJhbnQ=";
 }

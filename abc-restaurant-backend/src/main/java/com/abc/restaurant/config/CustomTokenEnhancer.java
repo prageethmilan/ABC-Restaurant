@@ -5,6 +5,8 @@ import com.abc.restaurant.entity.Staff;
 import com.abc.restaurant.repository.AdminRepo;
 import com.abc.restaurant.repository.StaffRepo;
 import com.abc.restaurant.repository.UserRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -20,6 +22,7 @@ import java.util.Optional;
 @Component
 public class CustomTokenEnhancer extends JwtAccessTokenConverter {
 
+    private static final Logger log = LoggerFactory.getLogger(CustomTokenEnhancer.class);
     private final AdminRepo adminRepo;
     private final StaffRepo staffRepo;
     private final UserRepo userRepo;
@@ -34,10 +37,12 @@ public class CustomTokenEnhancer extends JwtAccessTokenConverter {
 
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {
-
+        System.out.println("enhance method");
         final Map<String, Object> additionalInfo = new HashMap<>();
 
         User user = (User) oAuth2Authentication.getPrincipal();
+
+        System.out.println("user : "+ user.toString());
 
         Optional<Admin> admin = adminRepo.findByEmail(user.getUsername());
 
@@ -47,6 +52,7 @@ public class CustomTokenEnhancer extends JwtAccessTokenConverter {
                     .email(admin.get().getEmail())
                     .name(admin.get().getName())
                     .userRole(admin.get().getUserRole())
+                    .createdDate(admin.get().getCreatedDate())
                     .build();
             additionalInfo.put("user", build);
         }
@@ -59,6 +65,9 @@ public class CustomTokenEnhancer extends JwtAccessTokenConverter {
                     .email(customer.get().getEmail())
                     .name(customer.get().getName())
                     .userRole(customer.get().getUserRole())
+                    .username(customer.get().getUsername())
+                    .createdDate(customer.get().getCreatedDate())
+                    .userStatus(customer.get().getUserStatus())
                     .build();
             additionalInfo.put("user", build);
         }
