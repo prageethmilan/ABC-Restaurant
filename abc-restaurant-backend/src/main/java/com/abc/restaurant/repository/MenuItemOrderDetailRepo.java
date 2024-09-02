@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface MenuItemOrderDetailRepo extends JpaRepository<MenuItemOrderDetail, Long> {
 
-    List<MenuItemOrderDetail> findByMenuItemOrderId(Long id);
+    List<MenuItemOrderDetail> findByMenuItemsOrderId(Long id);
 }
