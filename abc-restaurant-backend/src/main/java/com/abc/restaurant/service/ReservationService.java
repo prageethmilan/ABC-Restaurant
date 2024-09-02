@@ -12,4 +12,6 @@ public interface ReservationService {
     void saveMenuItemOrder(MenuItemOrderRequestDTO menuItemOrderRequestDTO);
 
     Object getReservationsByType(QueryType type, Long id);
+
+    Object getReservationsByTypeAndId(QueryType type, Long id);
 }
