@@ -118,4 +118,16 @@ public class ReservationController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/by-order/{type}/{orderId}")
+    public ResponseEntity<Object> getReservationsByTypeAndId(@PathVariable QueryType type, @PathVariable Long orderId) {
+        return new ResponseEntity<>(
+                CommonResponseUtil.builder()
+                        .success(true)
+                        .message("")
+                        .data(reservationService.getReservationsByTypeAndId(type, orderId))
+                        .build(),
+                HttpStatus.OK
+        );
+    }
 }
