@@ -1,6 +1,7 @@
 package com.abc.restaurant.service;
 
 import com.abc.restaurant.dto.request.MenuItemOrderRequestDTO;
+import com.abc.restaurant.dto.request.ReservationApproveRequestDTO;
 import com.abc.restaurant.dto.request.TableReservationRequestDTO;
 import com.abc.restaurant.dto.response.TableReservationResponseDTO;
 import com.abc.restaurant.enums.QueryType;
@@ -16,4 +17,6 @@ public interface ReservationService {
     Object getReservationsByTypeAndId(QueryType type, Long id);
 
     Object getAllReservationsByType(QueryType type);
+
+    void updateReservationStatus(Long orderId, ReservationApproveRequestDTO requestDTO) throws ApplicationException;
 }
