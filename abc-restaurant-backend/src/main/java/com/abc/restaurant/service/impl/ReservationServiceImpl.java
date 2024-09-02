@@ -162,7 +162,7 @@ public class ReservationServiceImpl implements ReservationService {
             switch (type) {
                 case MEAL:
                     reservationResponseDTOS = menuItemOrderRepo.findByUserId(id).stream().map(mealOrderEntity -> {
-                        List<MenuItemOrderDetail> byMealOrderId = menuItemOrderDetailRepo.findByMenuItemOrderId(mealOrderEntity.getId());
+                        List<MenuItemOrderDetail> byMealOrderId = menuItemOrderDetailRepo.findByMenuItemsOrderId(mealOrderEntity.getId());
 
                         AtomicReference<Double> total = new AtomicReference<>((double) 0);
 
@@ -243,7 +243,7 @@ public class ReservationServiceImpl implements ReservationService {
             switch (type) {
                 case MEAL:
                     reservationResponseDTOS = menuItemOrderRepo.findByIdV2(id).stream().map(mealOrderEntity -> {
-                        List<MenuItemOrderDetail> byMealOrderId = menuItemOrderDetailRepo.findByMenuItemOrderId(mealOrderEntity.getId());
+                        List<MenuItemOrderDetail> byMealOrderId = menuItemOrderDetailRepo.findByMenuItemsOrderId(mealOrderEntity.getId());
 
                         AtomicReference<Double> total = new AtomicReference<>((double) 0);
 
