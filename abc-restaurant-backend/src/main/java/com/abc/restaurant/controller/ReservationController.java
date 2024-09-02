@@ -1,6 +1,7 @@
 package com.abc.restaurant.controller;
 
 import com.abc.restaurant.dto.request.MenuItemOrderRequestDTO;
+import com.abc.restaurant.dto.request.ReservationApproveRequestDTO;
 import com.abc.restaurant.dto.request.SaveQueryRequestDTO;
 import com.abc.restaurant.dto.request.TableReservationRequestDTO;
 import com.abc.restaurant.enums.QueryType;
@@ -141,5 +142,38 @@ public class ReservationController {
                         .build(),
                 HttpStatus.OK
         );
+    }
+
+    @PutMapping(value = "/{orderId}")
+    public ResponseEntity<CommonResponseUtil> updateReservationStatus(@PathVariable Long orderId, @RequestBody ReservationApproveRequestDTO reservationApproveRequestDTO) {
+        try{
+            reservationService.updateReservationStatus(orderId,reservationApproveRequestDTO);
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(true)
+                            .message("Reservation status updated successfully")
+                            .data(null)
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(false)
+                            .message("An unexpected error occurred.")
+                            .data(null)
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        } catch (ApplicationException e) {
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(e.isSuccess())
+                            .message(e.getMessage())
+                            .data(null)
+                            .build(),
+                    HttpStatus.OK
+            );
+        }
     }
 }
