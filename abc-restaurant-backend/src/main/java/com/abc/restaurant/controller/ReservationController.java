@@ -130,4 +130,16 @@ public class ReservationController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping(value = "/{type}")
+    public ResponseEntity<CommonResponseUtil> getReservationByType(@PathVariable QueryType type) {
+        return new ResponseEntity<>(
+                CommonResponseUtil.builder()
+                        .success(true)
+                        .message("")
+                        .data(reservationService.getAllReservationsByType(type))
+                        .build(),
+                HttpStatus.OK
+        );
+    }
 }
