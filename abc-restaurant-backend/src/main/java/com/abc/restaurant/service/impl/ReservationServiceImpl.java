@@ -234,4 +234,85 @@ public class ReservationServiceImpl implements ReservationService {
             throw e;
         }
     }
+
+    @Override
+    public Object getReservationsByTypeAndId(QueryType type, Long id) {
+        try {
+            List<ReservationResponseDTO<?, ?>> reservationResponseDTOS = new ArrayList<>();
+
+            switch (type) {
+                case MEAL:
+                    reservationResponseDTOS = menuItemOrderRepo.findByIdV2(id).stream().map(mealOrderEntity -> {
+                        List<MenuItemOrderDetail> byMealOrderId = menuItemOrderDetailRepo.findByMenuItemOrderId(mealOrderEntity.getId());
+
+                        AtomicReference<Double> total = new AtomicReference<>((double) 0);
+
+                        List<MenuItemResponseDTO> items = byMealOrderId.stream().map(mealOrderDetail -> {
+                            MenuItemResponseDTO dto = modelMapper.map(mealOrderDetail.getMenuItemsOrder(), MenuItemResponseDTO.class);
+                            dto.setQty(mealOrderDetail.getQty());
+                            total.updateAndGet(v -> v + mealOrderDetail.getPrice() * mealOrderDetail.getQty());
+                            return dto;
+                        }).collect(Collectors.toList());
+
+                        return ReservationResponseDTO.<MenuItemReservationResponseDTO, MenuItemResponseDTO>builder()
+                                .reservation(MenuItemReservationResponseDTO.builder()
+                                        .id(mealOrderEntity.getId())
+                                        .total(total.get())
+                                        .orderId(mealOrderEntity.getOrderId())
+                                        .operationalStatus(mealOrderEntity.getOperationalStatus())
+                                        .status(mealOrderEntity.getStatus())
+                                        .mealOrderType(mealOrderEntity.getMenuOrderType())
+                                        .userEntity(mealOrderEntity.getUser().getId())
+                                        .restaurant(mealOrderEntity.getRestaurant().getId())
+                                        .createdDate(mealOrderEntity.getCreatedDate())
+                                        .updatedDate(mealOrderEntity.getUpdatedDate())
+                                        .build())
+                                .items(items)
+                                .queries(queryService.getQueries(QueryType.MEAL, mealOrderEntity.getId()))
+                                .build();
+                    }).collect(Collectors.toList());
+                    break;
+
+                case TABLE:
+                    reservationResponseDTOS = tableReservationRepo.findByIdV2(id).stream().map(tableReservationEntity -> {
+                        List<TableReservationDetail> byReservationId = tableReservationDetailRepo.findByReservationId(tableReservationEntity.getId());
+
+                        List<TableResponseDTO> items = byReservationId.stream().map(tableReservationDetailEntity -> {
+                            return modelMapper.map(tableReservationDetailEntity.getTable(), TableResponseDTO.class);
+                        }).collect(Collectors.toList());
+
+                        return ReservationResponseDTO.<TableReservationResponseDTO, TableResponseDTO>builder()
+                                .reservation(TableReservationResponseDTO.builder()
+                                        .id(tableReservationEntity.getId())
+                                        .reservationCode(tableReservationEntity.getReservationCode())
+                                        .max_count(tableReservationEntity.getMaxCount())
+                                        .reservedDate(tableReservationEntity.getReservedDate())
+                                        .status(tableReservationEntity.getStatus())
+                                        .approvedBy(tableReservationEntity.getApprovedBy())
+                                        .approvedNote(tableReservationEntity.getApprovedNote())
+                                        .customerNote(tableReservationEntity.getCustomerNote())
+                                        .tableReservationType(tableReservationEntity.getTableReservationType())
+                                        .operationalStatus(tableReservationEntity.getOperationalStatus())
+                                        .createdDate(tableReservationEntity.getCreatedDate())
+                                        .updatedDate(tableReservationEntity.getUpdatedDate())
+                                        .build())
+                                .items(items)
+                                .queries(queryService.getQueries(QueryType.TABLE, tableReservationEntity.getId()))
+                                .build();
+                    }).collect(Collectors.toList());
+                    break;
+
+                case CUSTOM:
+                    reservationResponseDTOS.add(ReservationResponseDTO.builder()
+                            .queries(queryService.getQueries(QueryType.CUSTOM, id))
+                            .build());
+            }
+
+            return reservationResponseDTOS;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
 }
