@@ -34,7 +34,7 @@ public class TableReservation {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
-    private User user;
+    private User customer;
 
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     @Column(name = "reserved_date")
