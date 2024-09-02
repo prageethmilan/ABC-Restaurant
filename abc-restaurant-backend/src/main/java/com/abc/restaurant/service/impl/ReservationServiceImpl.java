@@ -1,6 +1,7 @@
 package com.abc.restaurant.service.impl;
 
 import com.abc.restaurant.dto.request.MenuItemOrderRequestDTO;
+import com.abc.restaurant.dto.request.ReservationApproveRequestDTO;
 import com.abc.restaurant.dto.request.TableReservationRequestDTO;
 import com.abc.restaurant.dto.response.*;
 import com.abc.restaurant.entity.*;
@@ -19,10 +20,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -393,6 +392,41 @@ public class ReservationServiceImpl implements ReservationService {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Override
+    public void updateReservationStatus(Long orderId, ReservationApproveRequestDTO requestDTO) throws ApplicationException {
+        try {
+            switch (requestDTO.getType()) {
+                case MEAL:
+                    Optional<MenuItemsOrder> order = menuItemOrderRepo.findById(orderId);
+                    if (!order.isPresent() || !order.get().getStatus().equals(CommonStatus.ACTIVE)){
+                        throw new ApplicationException(200, false, "Order does not exists");
+                    }
+
+                    order.get().setOperationalStatus(requestDTO.getMStatus());
+                    order.get().setUpdatedDate(new Date());
+                    menuItemOrderRepo.save(order.get());
+                    break;
+
+                case TABLE:
+                    Optional<TableReservation> tableReservation = tableReservationRepo.findById(orderId);
+
+                    if (!tableReservation.isPresent() || !tableReservation.get().getStatus().equals(CommonStatus.ACTIVE)){
+                        throw new ApplicationException(200, false, "Table reservation does not exists");
+                    }
+
+                    tableReservation.get().setOperationalStatus(requestDTO.getTStatus());
+                    tableReservation.get().setUpdatedDate(new Date());
+                    tableReservation.get().setApprovedNote(requestDTO.getNote());
+                    tableReservationRepo.save(tableReservation.get());
+                    break;
+            }
+        } catch (Exception e) {
+            throw e;
+        } catch (ApplicationException e) {
             throw e;
         }
     }
