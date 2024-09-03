@@ -91,6 +91,7 @@ function Index() {
 
   /** clear form data */
   function clearForm() {
+    setShow(!show)
     setForm({
       name:"",
       email: "",
