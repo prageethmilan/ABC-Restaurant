@@ -24,23 +24,19 @@ const Register = () => {
   const navigate = useNavigate()
 
   const [form, setForm] = useState({
-    username: "",
+    name: "",
     email: "",
-    password: "",
-    user_img: null // Use only user_img property for the file
+    password: ""
   })
 
 
   const createRegisterUser = form => {
     const formData = new FormData();
-    formData.append('username', form.username ?? null)
+    formData.append('name', form.name ?? null)
     formData.append('email', form.email ?? null)
     formData.append('password', form.password ?? null)
     return formData;
   }
-
-
-  console.log("register details ---> ", form)
 
 
   const onTextChange = async (event) => {
@@ -111,14 +107,14 @@ const Register = () => {
                 >
                   <div className="mb-1">
                     <Label className="form-label" for="register-username">
-                      Username
+                      Name
                     </Label>
                     <Input
                       type="text"
                       id="register-username"
-                      placeholder="johndoe"
-                      name="username"
-                      value={form.username}
+                      placeholder="john doe"
+                      name="name"
+                      value={form.name}
                       autoFocus
                       onChange={onTextChange}
                     />
