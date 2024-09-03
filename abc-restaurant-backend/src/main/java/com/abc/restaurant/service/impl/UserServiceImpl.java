@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     public void saveUser(UserDTO userDTO) throws UserException, ApplicationException {
         log.info("Save user function starts : {}", userDTO);
         try {
-            if (userDTO.getUsername().isEmpty())
+            if (userDTO.getName().isEmpty())
                 throw new UserException(INVALID, false, "Username is required!");
 
             if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty() || !validator.isValidEmail(userDTO.getEmail()))
@@ -109,10 +109,10 @@ public class UserServiceImpl implements UserService {
             // Determine which parameters are provided and query accordingly
             if (username != null && !username.isEmpty() && email != null && !email.isEmpty()) {
                 // Both username and email are provided
-                user = userRepo.findUserByUsernameAndEmail(username, email);
+                user = userRepo.findUserByNameAndEmail(username, email);
             } else if (username != null && !username.isEmpty()) {
                 // Only username is provided
-                user = userRepo.findUserByUsername(username);
+                user = userRepo.findUserByName(username);
             } else if (email != null && !email.isEmpty()) {
                 // Only email is provided
                 user = userRepo.findUserByEmail(email);

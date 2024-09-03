@@ -26,14 +26,20 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "username", nullable = false)
-    private String username;
-
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "nic")
+    String nic;
+
+    @Column(name = "phone_number")
+    String phoneNumber;
+
+    @Column(name = "home_address")
+    String homeAddress;
 
     @Column(name = "user_role", nullable = false)
     @Enumerated(value = EnumType.STRING)
@@ -48,9 +54,13 @@ public class User {
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private Date createdDate;
 
-    public User(String name, String username, String email, String password, UserRole userRole, UserStatus userStatus) {
+    @Column(name = "updated_date")
+    @CreationTimestamp
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
+    Date updatedDate;
+
+    public User(String name, String email, String password, UserRole userRole, UserStatus userStatus) {
         this.name = name;
-        this.username = username;
         this.email = email;
         this.password = password;
         this.userRole = userRole;

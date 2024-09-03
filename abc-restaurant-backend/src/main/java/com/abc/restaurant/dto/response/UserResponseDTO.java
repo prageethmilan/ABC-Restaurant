@@ -14,8 +14,11 @@ import java.util.Date;
 public class UserResponseDTO {
     private Long id;
     private String name;
-    private String username;
     private String email;
+    private String nic;
+    private String phoneNumber;
+    private String homeAddress;
     private UserRole userRole;
     private UserStatus userStatus;
+    private Date createdDate;
 }

@@ -51,8 +51,12 @@ public class CustomTokenEnhancer extends JwtAccessTokenConverter {
                     .id(admin.get().getId())
                     .email(admin.get().getEmail())
                     .name(admin.get().getName())
+                    .nic(admin.get().getNic())
+                    .phoneNumber(admin.get().getPhoneNumber())
+                    .homeAddress(admin.get().getHomeAddress())
                     .userRole(admin.get().getUserRole())
                     .createdDate(admin.get().getCreatedDate())
+                    .updatedDate(admin.get().getUpdatedDate())
                     .build();
             additionalInfo.put("user", build);
         }
@@ -65,9 +69,12 @@ public class CustomTokenEnhancer extends JwtAccessTokenConverter {
                     .email(customer.get().getEmail())
                     .name(customer.get().getName())
                     .userRole(customer.get().getUserRole())
-                    .username(customer.get().getUsername())
+                    .nic(customer.get().getNic())
+                    .homeAddress(customer.get().getHomeAddress())
+                    .phoneNumber(customer.get().getPhoneNumber())
                     .createdDate(customer.get().getCreatedDate())
                     .userStatus(customer.get().getUserStatus())
+                    .updatedDate(customer.get().getUpdatedDate())
                     .build();
             additionalInfo.put("user", build);
         }
@@ -79,7 +86,12 @@ public class CustomTokenEnhancer extends JwtAccessTokenConverter {
                     .id(staff.get().getId())
                     .email(staff.get().getEmail())
                     .name(staff.get().getName())
+                    .nic(staff.get().getNic())
+                    .phoneNumber(staff.get().getPhoneNumber())
+                    .homeAddress(staff.get().getHomeAddress())
                     .userRole(staff.get().getUserRole())
+                    .createdDate(staff.get().getCreatedDate())
+                    .updatedDate(staff.get().getUpdatedDate())
                     .build();
             additionalInfo.put("user", build);
         }

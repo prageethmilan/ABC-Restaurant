@@ -82,7 +82,7 @@ public class UserController {
         List<UserDTO> allUsers = userService.getAllUsers();
         List<UserResponseDTO> userList = new ArrayList<>(Collections.emptyList());
         allUsers.forEach(userDTO -> {
-            userList.add(new UserResponseDTO(userDTO.getId(), userDTO.getName(), userDTO.getUsername(), userDTO.getEmail(), userDTO.getUserRole(), userDTO.getUserStatus()));
+            userList.add(new UserResponseDTO(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), userDTO.getNic(), userDTO.getPhoneNumber(), userDTO.getHomeAddress(),userDTO.getUserRole(), userDTO.getUserStatus(), userDTO.getCreatedDate()));
         });
         return new ResponseEntity<>(
                 CommonResponseUtil.builder()
@@ -112,7 +112,7 @@ public class UserController {
             UserDTO userDTO = userService.getUserByUsernameOrEmail(username,email);
             UserResponseDTO dto = null;
             if (userDTO != null)
-                dto = new UserResponseDTO(userDTO.getId(), userDTO.getName(), userDTO.getUsername(), userDTO.getEmail(), userDTO.getUserRole(), userDTO.getUserStatus());
+                dto = new UserResponseDTO(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), userDTO.getNic(),userDTO.getPhoneNumber(),userDTO.getHomeAddress(),userDTO.getUserRole(), userDTO.getUserStatus(), userDTO.getCreatedDate());
             if (dto != null) {
                 return new ResponseEntity<>(
                         CommonResponseUtil.builder()
@@ -158,7 +158,7 @@ public class UserController {
         try {
             UserDTO userById = userService.getUserById(id);
             UserResponseDTO userResponseDTO = null;
-            userResponseDTO = new UserResponseDTO(userById.getId(), userById.getName(), userById.getUsername(), userById.getEmail(), userById.getUserRole(), userById.getUserStatus());
+            userResponseDTO = new UserResponseDTO(userById.getId(), userById.getName(), userById.getEmail(), userById.getNic(), userById.getPhoneNumber(), userById.getHomeAddress(), userById.getUserRole(), userById.getUserStatus(), userById.getCreatedDate());
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
@@ -227,7 +227,7 @@ public class UserController {
             List<UserResponseDTO> users = new ArrayList<>(Collections.emptyList());
             List<UserDTO> allUsersByStatus = userService.getAllUsersByStatus(status);
             allUsersByStatus.forEach(userDTO -> {
-                users.add(new UserResponseDTO(userDTO.getId(), userDTO.getName(), userDTO.getUsername(), userDTO.getEmail(), userDTO.getUserRole(), userDTO.getUserStatus()));
+                users.add(new UserResponseDTO(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), userDTO.getNic(), userDTO.getPhoneNumber(), userDTO.getHomeAddress(),userDTO.getUserRole(), userDTO.getUserStatus(), userDTO.getCreatedDate()));
             });
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
