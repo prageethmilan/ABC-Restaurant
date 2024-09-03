@@ -14,3 +14,5 @@ export const  USER_LOGIN_DETAILS = 'USER_DETAILS'
 export const ROUTE_PATH = ''
 
 export const LOGIN_PATH = `${ROUTE_PATH}/login`
+
+export const CART_ITEMS = 'CART_ITEMS'
