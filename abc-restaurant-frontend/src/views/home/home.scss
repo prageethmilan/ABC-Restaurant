@@ -1,16 +1,5 @@
 
 .home_page {
-  .banner-background {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url("@src/assets/images/pages/home_banner.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 86.5vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
   .main_sub_header{
     font-size: 70px;
     font-weight: 700;
@@ -42,9 +31,16 @@
   }
 
   .btn_sch {
+    width: fit-content;
+    margin: auto;
     font-size: 1.2rem;
     font-weight: bold;
     color: #fff !important;
+  }
+
+  .btn_sch:hover {
+    background-color: #FD7E14!important;
+    color: white;
   }
 
   .introduction_page {
