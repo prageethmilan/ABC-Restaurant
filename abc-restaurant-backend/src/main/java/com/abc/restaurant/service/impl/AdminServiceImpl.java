@@ -47,10 +47,12 @@ public class AdminServiceImpl implements AdminService {
     public void saveAdmin(SaveAdminRequestDTO saveAdminRequestDTO) throws ApplicationException {
         try {
             if (saveAdminRequestDTO.getId() == 0) {
+                System.out.println(saveAdminRequestDTO.toString());
                 validateUniqueEmail(saveAdminRequestDTO.getEmail());
 
                 switch (saveAdminRequestDTO.getRole()) {
                     case ADMIN:
+                        System.out.println(saveAdminRequestDTO.getRole());
                         Admin newAdmin = Admin.builder()
                                 .name(saveAdminRequestDTO.getName())
                                 .email(saveAdminRequestDTO.getEmail())

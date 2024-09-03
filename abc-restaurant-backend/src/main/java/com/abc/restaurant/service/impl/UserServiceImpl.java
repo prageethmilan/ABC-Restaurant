@@ -59,10 +59,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserDTO userDTO) throws UserException, ApplicationException {
-        log.info("Save user function starts : {}", userDTO);
+        System.out.println("save user function");
         try {
             if (userDTO.getName().isEmpty())
-                throw new UserException(INVALID, false, "Username is required!");
+                throw new UserException(INVALID, false, "Name is required!");
 
             if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty() || !validator.isValidEmail(userDTO.getEmail()))
                 throw new UserException(INVALID, false, "Please enter a valid email address.");
