@@ -176,4 +176,16 @@ public class ReservationController {
             );
         }
     }
+
+    @GetMapping
+    public ResponseEntity<CommonResponseUtil> getAllReservations() {
+        return new ResponseEntity<>(
+                CommonResponseUtil.builder()
+                        .success(true)
+                        .message("")
+                        .data(reservationService.findAllReservations())
+                        .build(),
+                HttpStatus.OK
+        );
+    }
 }

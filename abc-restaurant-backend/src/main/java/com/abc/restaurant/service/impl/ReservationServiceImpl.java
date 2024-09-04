@@ -13,6 +13,7 @@ import com.abc.restaurant.service.QueryService;
 import com.abc.restaurant.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,8 +54,8 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public TableReservationResponseDTO saveTableReservation(TableReservationRequestDTO reqDTO) throws ApplicationException {
         try {
-            String authentication = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            Optional<User> customer = userRepo.findByEmail(authentication);
+//            String authentication = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Optional<User> customer = userRepo.findByEmail(reqDTO.getEmail());
 
             if (!customer.isPresent() || !customer.get().getUserStatus().equals(UserStatus.ACTIVE)){
                 throw new ApplicationException(200, false, "Customer not found!");
@@ -86,6 +87,11 @@ public class ReservationServiceImpl implements ReservationService {
         } catch (ApplicationException e) {
             throw e;
         }
+    }
+
+    @Override
+    public List<TableReservationResponseDTO> findAllReservations() {
+        return modelMapper.map(tableReservationRepo.findAll(), new TypeToken<List<TableReservationResponseDTO>>(){}.getType());
     }
 
     @Override
@@ -199,11 +205,12 @@ public class ReservationServiceImpl implements ReservationService {
                             return modelMapper.map(tableReservationDetailEntity.getTable(), TableResponseDTO.class);
                         }).collect(Collectors.toList());
 
+                        new RestaurantResponseDTO();
                         return ReservationResponseDTO.<TableReservationResponseDTO, TableResponseDTO>builder()
                                 .reservation(TableReservationResponseDTO.builder()
                                         .id(tableReservation.getId())
                                         .reservationCode(tableReservation.getReservationCode())
-                                        .max_count(tableReservation.getMaxCount())
+                                        .maxCount(tableReservation.getMaxCount())
                                         .reservedDate(tableReservation.getReservedDate())
                                         .status(tableReservation.getStatus())
                                         .approvedBy(tableReservation.getApprovedBy())
@@ -211,6 +218,12 @@ public class ReservationServiceImpl implements ReservationService {
                                         .customerNote(tableReservation.getCustomerNote())
                                         .tableReservationType(tableReservation.getTableReservationType())
                                         .operationalStatus(tableReservation.getOperationalStatus())
+                                        .restaurantResponseDTO(RestaurantResponseDTO.builder()
+                                                .id(tableReservation.getRestaurant().getId())
+                                                .name(tableReservation.getRestaurant().getName())
+                                                .phone(tableReservation.getRestaurant().getPhone())
+                                                .email(tableReservation.getRestaurant().getEmail())
+                                                .build())
                                         .createdDate(tableReservation.getCreatedDate())
                                         .updatedDate(tableReservation.getUpdatedDate())
                                         .build())
@@ -284,7 +297,7 @@ public class ReservationServiceImpl implements ReservationService {
                                 .reservation(TableReservationResponseDTO.builder()
                                         .id(tableReservationEntity.getId())
                                         .reservationCode(tableReservationEntity.getReservationCode())
-                                        .max_count(tableReservationEntity.getMaxCount())
+                                        .maxCount(tableReservationEntity.getMaxCount())
                                         .reservedDate(tableReservationEntity.getReservedDate())
                                         .status(tableReservationEntity.getStatus())
                                         .approvedBy(tableReservationEntity.getApprovedBy())
@@ -292,6 +305,12 @@ public class ReservationServiceImpl implements ReservationService {
                                         .customerNote(tableReservationEntity.getCustomerNote())
                                         .tableReservationType(tableReservationEntity.getTableReservationType())
                                         .operationalStatus(tableReservationEntity.getOperationalStatus())
+                                        .restaurantResponseDTO(RestaurantResponseDTO.builder()
+                                                .id(tableReservationEntity.getRestaurant().getId())
+                                                .name(tableReservationEntity.getRestaurant().getName())
+                                                .phone(tableReservationEntity.getRestaurant().getPhone())
+                                                .email(tableReservationEntity.getRestaurant().getEmail())
+                                                .build())
                                         .createdDate(tableReservationEntity.getCreatedDate())
                                         .updatedDate(tableReservationEntity.getUpdatedDate())
                                         .build())
@@ -365,7 +384,7 @@ public class ReservationServiceImpl implements ReservationService {
                                 .reservation(TableReservationResponseDTO.builder()
                                         .id(tableReservationEntity.getId())
                                         .reservationCode(tableReservationEntity.getReservationCode())
-                                        .max_count(tableReservationEntity.getMaxCount())
+                                        .maxCount(tableReservationEntity.getMaxCount())
                                         .reservedDate(tableReservationEntity.getReservedDate())
                                         .status(tableReservationEntity.getStatus())
                                         .approvedBy(tableReservationEntity.getApprovedBy())
@@ -373,6 +392,12 @@ public class ReservationServiceImpl implements ReservationService {
                                         .customerNote(tableReservationEntity.getCustomerNote())
                                         .tableReservationType(tableReservationEntity.getTableReservationType())
                                         .operationalStatus(tableReservationEntity.getOperationalStatus())
+                                        .restaurantResponseDTO(RestaurantResponseDTO.builder()
+                                                .id(tableReservationEntity.getRestaurant().getId())
+                                                .name(tableReservationEntity.getRestaurant().getName())
+                                                .phone(tableReservationEntity.getRestaurant().getPhone())
+                                                .email(tableReservationEntity.getRestaurant().getEmail())
+                                                .build())
                                         .createdDate(tableReservationEntity.getCreatedDate())
                                         .updatedDate(tableReservationEntity.getUpdatedDate())
                                         .build())

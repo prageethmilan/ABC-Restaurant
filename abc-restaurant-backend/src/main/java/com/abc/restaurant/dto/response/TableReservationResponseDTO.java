@@ -16,7 +16,7 @@ import java.util.Date;
 public class TableReservationResponseDTO {
     private Long id;
     private String reservationCode;
-    private Integer max_count;
+    private Integer maxCount;
     private Date reservedDate;
     private CommonStatus status;
     private Long approvedBy;
@@ -24,6 +24,7 @@ public class TableReservationResponseDTO {
     private String customerNote;
     private TableReservationType tableReservationType;
     private TableReservationOperationalStatus operationalStatus;
+    private RestaurantResponseDTO restaurantResponseDTO;
     private Date createdDate;
     private Date updatedDate;
 }
