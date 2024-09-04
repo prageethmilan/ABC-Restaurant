@@ -91,7 +91,54 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<TableReservationResponseDTO> findAllReservations() {
-        return modelMapper.map(tableReservationRepo.findAll(), new TypeToken<List<TableReservationResponseDTO>>(){}.getType());
+        List<TableReservation> all = tableReservationRepo.findAll();
+        List<TableReservationResponseDTO> reservationResponseDTOS = new ArrayList<>();
+        all.forEach(item -> {
+            Optional<Restaurant> restaurant = restaurantRepo.findById(item.getRestaurant().getId());
+            RestaurantResponseDTO restaurantResponseDTO = null;
+            if (restaurant.isPresent()){
+                new RestaurantResponseDTO();
+                restaurantResponseDTO = RestaurantResponseDTO.builder()
+                        .id(restaurant.get().getId())
+                        .name(restaurant.get().getName())
+                        .phone(restaurant.get().getPhone())
+                        .email(restaurant.get().getEmail())
+                        .address(restaurant.get().getAddress())
+                        .status(restaurant.get().getStatus())
+                        .createdDate(restaurant.get().getCreatedDate())
+                        .updatedDate(restaurant.get().getUpdatedDate())
+                        .build();
+            }
+            reservationResponseDTOS.add(new TableReservationResponseDTO(item.getId(), item.getReservationCode(), item.getMaxCount(), item.getReservedDate(), item.getStatus(), item.getApprovedBy(), item.getApprovedNote(), item.getCustomerNote(), item.getTableReservationType(), item.getOperationalStatus(), restaurantResponseDTO, item.getCreatedDate(), item.getUpdatedDate()));
+        });
+
+        return reservationResponseDTOS;
+    }
+
+    @Override
+    public List<TableReservationResponseDTO> getAllReservationsByReservationType(TableReservationType reservationType) {
+        List<TableReservation> all = tableReservationRepo.findTableReservationByTableReservationType(reservationType);
+        List<TableReservationResponseDTO> reservationResponseDTOS = new ArrayList<>();
+        all.forEach(item -> {
+            Optional<Restaurant> restaurant = restaurantRepo.findById(item.getRestaurant().getId());
+            RestaurantResponseDTO restaurantResponseDTO = null;
+            if (restaurant.isPresent()){
+                new RestaurantResponseDTO();
+                restaurantResponseDTO = RestaurantResponseDTO.builder()
+                        .id(restaurant.get().getId())
+                        .name(restaurant.get().getName())
+                        .phone(restaurant.get().getPhone())
+                        .email(restaurant.get().getEmail())
+                        .address(restaurant.get().getAddress())
+                        .status(restaurant.get().getStatus())
+                        .createdDate(restaurant.get().getCreatedDate())
+                        .updatedDate(restaurant.get().getUpdatedDate())
+                        .build();
+            }
+            reservationResponseDTOS.add(new TableReservationResponseDTO(item.getId(), item.getReservationCode(), item.getMaxCount(), item.getReservedDate(), item.getStatus(), item.getApprovedBy(), item.getApprovedNote(), item.getCustomerNote(), item.getTableReservationType(), item.getOperationalStatus(), restaurantResponseDTO, item.getCreatedDate(), item.getUpdatedDate()));
+        });
+
+        return reservationResponseDTOS;
     }
 
     @Override
@@ -160,7 +207,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Object getReservationsByType(QueryType type, Long id) {
+    public List<ReservationResponseDTO<?,?>> getReservationsByType(QueryType type, Long id) {
         try {
             List<ReservationResponseDTO<?, ?>> reservationResponseDTOS = new ArrayList<>();
 
@@ -205,7 +252,20 @@ public class ReservationServiceImpl implements ReservationService {
                             return modelMapper.map(tableReservationDetailEntity.getTable(), TableResponseDTO.class);
                         }).collect(Collectors.toList());
 
-                        new RestaurantResponseDTO();
+                        Optional<Restaurant> restaurant = restaurantRepo.findById(tableReservation.getRestaurant().getId());
+
+                        RestaurantResponseDTO restaurantResponseDTO = null;
+
+                        if (restaurant.isPresent()){
+                            new RestaurantResponseDTO();
+                            restaurantResponseDTO = RestaurantResponseDTO.builder()
+                                    .id(restaurant.get().getId())
+                                    .name(restaurant.get().getName())
+                                    .phone(restaurant.get().getPhone())
+                                    .email(restaurant.get().getEmail())
+                                    .build();
+                        }
+
                         return ReservationResponseDTO.<TableReservationResponseDTO, TableResponseDTO>builder()
                                 .reservation(TableReservationResponseDTO.builder()
                                         .id(tableReservation.getId())
@@ -218,12 +278,7 @@ public class ReservationServiceImpl implements ReservationService {
                                         .customerNote(tableReservation.getCustomerNote())
                                         .tableReservationType(tableReservation.getTableReservationType())
                                         .operationalStatus(tableReservation.getOperationalStatus())
-                                        .restaurantResponseDTO(RestaurantResponseDTO.builder()
-                                                .id(tableReservation.getRestaurant().getId())
-                                                .name(tableReservation.getRestaurant().getName())
-                                                .phone(tableReservation.getRestaurant().getPhone())
-                                                .email(tableReservation.getRestaurant().getEmail())
-                                                .build())
+                                        .restaurantResponseDTO(restaurantResponseDTO)
                                         .createdDate(tableReservation.getCreatedDate())
                                         .updatedDate(tableReservation.getUpdatedDate())
                                         .build())
@@ -293,6 +348,20 @@ public class ReservationServiceImpl implements ReservationService {
                             return modelMapper.map(tableReservationDetailEntity.getTable(), TableResponseDTO.class);
                         }).collect(Collectors.toList());
 
+                        Optional<Restaurant> restaurant = restaurantRepo.findById(tableReservationEntity.getRestaurant().getId());
+
+                        RestaurantResponseDTO restaurantResponseDTO = null;
+
+                        if (restaurant.isPresent()){
+                            new RestaurantResponseDTO();
+                            restaurantResponseDTO = RestaurantResponseDTO.builder()
+                                    .id(restaurant.get().getId())
+                                    .name(restaurant.get().getName())
+                                    .phone(restaurant.get().getPhone())
+                                    .email(restaurant.get().getEmail())
+                                    .build();
+                        }
+
                         return ReservationResponseDTO.<TableReservationResponseDTO, TableResponseDTO>builder()
                                 .reservation(TableReservationResponseDTO.builder()
                                         .id(tableReservationEntity.getId())
@@ -305,12 +374,7 @@ public class ReservationServiceImpl implements ReservationService {
                                         .customerNote(tableReservationEntity.getCustomerNote())
                                         .tableReservationType(tableReservationEntity.getTableReservationType())
                                         .operationalStatus(tableReservationEntity.getOperationalStatus())
-                                        .restaurantResponseDTO(RestaurantResponseDTO.builder()
-                                                .id(tableReservationEntity.getRestaurant().getId())
-                                                .name(tableReservationEntity.getRestaurant().getName())
-                                                .phone(tableReservationEntity.getRestaurant().getPhone())
-                                                .email(tableReservationEntity.getRestaurant().getEmail())
-                                                .build())
+                                        .restaurantResponseDTO(restaurantResponseDTO)
                                         .createdDate(tableReservationEntity.getCreatedDate())
                                         .updatedDate(tableReservationEntity.getUpdatedDate())
                                         .build())
@@ -380,6 +444,20 @@ public class ReservationServiceImpl implements ReservationService {
                             return modelMapper.map(tableReservationDetailEntity.getTable(), TableResponseDTO.class);
                         }).collect(Collectors.toList());
 
+                        Optional<Restaurant> restaurant = restaurantRepo.findById(tableReservationEntity.getRestaurant().getId());
+
+                        RestaurantResponseDTO restaurantResponseDTO = null;
+
+                        if (restaurant.isPresent()){
+                            new RestaurantResponseDTO();
+                            restaurantResponseDTO = RestaurantResponseDTO.builder()
+                                    .id(restaurant.get().getId())
+                                    .name(restaurant.get().getName())
+                                    .phone(restaurant.get().getPhone())
+                                    .email(restaurant.get().getEmail())
+                                    .build();
+                        }
+
                         return ReservationResponseDTO.<TableReservationResponseDTO, TableResponseDTO>builder()
                                 .reservation(TableReservationResponseDTO.builder()
                                         .id(tableReservationEntity.getId())
@@ -392,12 +470,7 @@ public class ReservationServiceImpl implements ReservationService {
                                         .customerNote(tableReservationEntity.getCustomerNote())
                                         .tableReservationType(tableReservationEntity.getTableReservationType())
                                         .operationalStatus(tableReservationEntity.getOperationalStatus())
-                                        .restaurantResponseDTO(RestaurantResponseDTO.builder()
-                                                .id(tableReservationEntity.getRestaurant().getId())
-                                                .name(tableReservationEntity.getRestaurant().getName())
-                                                .phone(tableReservationEntity.getRestaurant().getPhone())
-                                                .email(tableReservationEntity.getRestaurant().getEmail())
-                                                .build())
+                                        .restaurantResponseDTO(restaurantResponseDTO)
                                         .createdDate(tableReservationEntity.getCreatedDate())
                                         .updatedDate(tableReservationEntity.getUpdatedDate())
                                         .build())

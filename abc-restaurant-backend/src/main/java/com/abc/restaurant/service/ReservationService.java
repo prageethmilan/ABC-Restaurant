@@ -6,6 +6,7 @@ import com.abc.restaurant.dto.request.TableReservationRequestDTO;
 import com.abc.restaurant.dto.response.ReservationResponseDTO;
 import com.abc.restaurant.dto.response.TableReservationResponseDTO;
 import com.abc.restaurant.enums.QueryType;
+import com.abc.restaurant.enums.TableReservationType;
 import com.abc.restaurant.exception.ApplicationException;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public interface ReservationService {
     TableReservationResponseDTO saveTableReservation(TableReservationRequestDTO reqDTO) throws ApplicationException;
 
     List<TableReservationResponseDTO> findAllReservations();
+
+    List<TableReservationResponseDTO> getAllReservationsByReservationType(TableReservationType reservationType);
 
     void saveMenuItemOrder(MenuItemOrderRequestDTO menuItemOrderRequestDTO);
 

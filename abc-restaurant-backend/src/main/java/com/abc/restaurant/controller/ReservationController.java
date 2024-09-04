@@ -5,6 +5,7 @@ import com.abc.restaurant.dto.request.ReservationApproveRequestDTO;
 import com.abc.restaurant.dto.request.SaveQueryRequestDTO;
 import com.abc.restaurant.dto.request.TableReservationRequestDTO;
 import com.abc.restaurant.enums.QueryType;
+import com.abc.restaurant.enums.TableReservationType;
 import com.abc.restaurant.exception.ApplicationException;
 import com.abc.restaurant.service.QueryService;
 import com.abc.restaurant.service.ReservationService;
@@ -139,6 +140,18 @@ public class ReservationController {
                         .success(true)
                         .message("")
                         .data(reservationService.getAllReservationsByType(type))
+                        .build(),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping(value = "/table/{reservationType}")
+    public ResponseEntity<CommonResponseUtil> getReservationByReservationType(@PathVariable TableReservationType reservationType) {
+        return new ResponseEntity<>(
+                CommonResponseUtil.builder()
+                        .success(true)
+                        .message("")
+                        .data(reservationService.getAllReservationsByReservationType(reservationType))
                         .build(),
                 HttpStatus.OK
         );
