@@ -6,13 +6,13 @@ import logo from "@src/assets/images/logo/logo.png"
 //Template config options
 const themeConfig = {
   app: {
-    appName: "ABC",
+    appName: "",
     appLogoImage: logo
   },
   layout: {
     isRTL: false,
     skin: "light", // light, dark, bordered, semi-dark
-    type: "vertical", // vertical, horizontal
+    type: "horizontal", // vertical, horizontal
     contentWidth: "full", // full, boxed
     menu: {
       isHidden: false,
