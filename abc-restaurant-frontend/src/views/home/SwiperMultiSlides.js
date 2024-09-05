@@ -5,8 +5,8 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { Button, Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap"
 import { ArrowRightCircle } from "react-feather"
 import { useNavigate } from "react-router-dom"
-// import { CATEGORY_PATH } from "@src/router/routes/route-constant"
-// import { fullDetailsOfSelectCategory } from "@src/utility/text_details";
+import { CATEGORY_PATH } from "@src/router/routes/route-constant"
+import { fullDetailsOfSelectCategory } from "@src/utility/text_details";
 
 const params = {
   slidesPerView: 4,
@@ -18,12 +18,10 @@ const params = {
   }
 }
 
-const MultiCarouselSlides = () => {
-
-  const fullDetailsOfSelectCategory = []
+const SwiperMultiSlides = () => {
   const navigate = useNavigate()
   const handleButtonClick = (id) => {
-    navigate(`/category/:categoryTitle/${id}`)
+    navigate(`${CATEGORY_PATH}/${id}`)
   }
   const cardImgStyles = {
     width: "100%",
@@ -52,4 +50,4 @@ const MultiCarouselSlides = () => {
   )
 }
 
-export default MultiCarouselSlides
+export default SwiperMultiSlides
