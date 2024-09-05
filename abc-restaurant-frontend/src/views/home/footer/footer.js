@@ -1,5 +1,5 @@
 import React from "react"
-// import { Assets } from "@src/assets/images"
+import { Assets } from "@src/assets/images"
 import {
   ArrowRight,
   Cast,
@@ -21,12 +21,12 @@ const FooterPage = () => {
         <div className="container text-center">
           <p> FIND US ON SOCIAL MEDIA</p>
           <div className="social_icons">
-            {/*<a href="#"><img src={Assets.facebook} /></a>*/}
-            {/*<a href="#"><img src={Assets.instagram} /></a>*/}
-            {/*<a href="#"><img src={Assets.twitter} /></a>*/}
-            {/*<a href="#"><img src={Assets.whatsapp} /></a>*/}
-            {/*<a href="#"><img src={Assets.linkedin} /></a>*/}
-            {/*<a href="#"><img src={Assets.snapchat} /></a>*/}
+            <a href="#"><img src={Assets.facebook} /></a>
+            <a href="#"><img src={Assets.instagram} /></a>
+            <a href="#"><img src={Assets.twitter} /></a>
+            <a href="#"><img src={Assets.whatsapp} /></a>
+            <a href="#"><img src={Assets.linkedin} /></a>
+            <a href="#"><img src={Assets.snapchat} /></a>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@ const FooterPage = () => {
           <div className="row">
             <div className="col-md-3 footer-box">
               <p><b>
-                <Info size={20} /> ABC Restaurant App
+                <Info size={20} /> Spicy Meals Restaurant App
               </b></p>
               <p>
                 <small>Spicy Meals is an intuitive and personalized restaurant app designed to cater to your culinary
@@ -70,7 +70,7 @@ const FooterPage = () => {
 
             <div className="col-md-3 footer-box">
               <p className={"mb-2"}><Edit size={22} /><b> CONTACT US</b></p>
-              <p><MapPin size={17} /> ABC Restaurant, Colombo</p>
+              <p><MapPin size={17} /> Spicy Meals, Colombo</p>
               <p><Phone size={17} /> (+94)-123456789</p>
               <p><Headphones size={17} /> + 01 234 567 89</p>
               <p><Mail size={17} /> abcd@gmail.com</p>
@@ -79,7 +79,7 @@ const FooterPage = () => {
           <hr />
           <p className="copyRight">
             <small> CopyRight © 2024 All Right Reserved . <br /> ~ Website Developed by
-              Prageeth Milan ~ </small>
+              Ishara Maduranga. ~ </small>
           </p>
         </div>
       </section>
