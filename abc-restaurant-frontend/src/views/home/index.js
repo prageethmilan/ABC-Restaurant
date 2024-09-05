@@ -1,44 +1,44 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  CardText,
-  CardLink, Row, Col, Label, Form, Button
-} from "reactstrap"
-import MultiCarouselSlides from "@src/views/home/MultiCarouselSlides"
-// import CarouselAutoPlay from "@src/views/home/CarouselAutoPlay"
-import './style.scss'
-import Select from "react-select"
-import { useNavigate } from "react-router-dom"
-import SwiperCore, { Autoplay } from 'swiper'
-// import Gallery from "@src/views/home/gallery/Gallery"
-import Footer from "@src/views/home/footer/footer"
+// ** Styles
+import "@styles/react/libs/charts/apex-charts.scss"
+import { Assets } from "@src/assets/images"
+import { Button, Card, CardBody, Col, Form, Label, Row } from "reactstrap"
+import "./home.scss"
+import SwiperMultiSlides from "@src/views/home/SwiperMultiSlides"
 import { useRTL } from "@hooks/useRTL"
+import "@styles/react/libs/swiper/swiper.scss"
+import FooterPage from "@src/views/home/footer/footer"
+import Select from "react-select"
+
+
+import { useNavigate } from "react-router-dom"
+import { validatePlaceSearchDetails } from "@src/utility/validation"
 import { useState } from "react"
-import logo from '@src/assets/images/logo/logo.png'
-import CarouselAutoPlay from "@src/views/home/CarouselAutoPlay";
+import Gallery from "@src/views/home/gallery/Gallery"
+import SwiperAutoplay from "@src/views/home/SwiperAutoplay"
 
-
+// ** Styles
+import SwiperCore, { Autoplay } from 'swiper'
 SwiperCore.use([Autoplay])
 const Home = () => {
 
   const [isRtl] = useRTL()
   const navigate = useNavigate()
+  const divStyle = {
+    background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(${Assets.banner})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    height: "86.5vh", // Set the height as per your design
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "auto"
+  }
 
   const [form, setForm] = useState({
     tag: "", minscore: "", maxscore: ""
   })
-
-  const categoriesSingle = [
-    { value: "Colombo", label: "Colombo" },
-    { value: "Negombo", label: "Negombo" },
-    { value: "Kandy", label: "Kandy" },
-    { value: "Galle", label: "Galle" },
-    { value: "Mathara", label: "Mathara" },
-    { value: "Nuwaraeliya", label: "Nuwaraeliya" },
-    { value: "Rathnapura", label: "Rathnapura" }
-  ]
 
   const handleCategoryChange = (selectedTagType) => {
     setForm((prev) => ({
@@ -46,40 +46,53 @@ const Home = () => {
     }))
   }
 
-  const apiHandlerForSearch = () => {
-    // if (validatePlaceSearchDetails(form)) {
+  console.log("form print =====================> ", form)
 
-      /*     searchPlaceByTag_Min_Max(createPlaceForSearch(form))
-             .then((response) => {
-               if (response.data) {
-                 navigate(PLACES_PATH_FILTER, {
-                   state: { searchData: response.data.data } // Pass search results as state
-                 })
-               }
-             })
-             .catch((error) => {
-               console.error("API Request Error:", error.message)
-             })*/
-    // }
+  const createPlaceForSearch = form => {
+    return {
+      tag: form.tag ?? null, minscore: form.minscore ?? null, maxscore: form.maxscore ?? null
+    }
+  }
+  const apiHandlerForSearch = () => {
+    if (validatePlaceSearchDetails(form)) {
+
+ /*     searchPlaceByTag_Min_Max(createPlaceForSearch(form))
+        .then((response) => {
+          if (response.data) {
+            navigate(PLACES_PATH_FILTER, {
+              state: { searchData: response.data.data } // Pass search results as state
+            })
+          }
+        })
+        .catch((error) => {
+          console.error("API Request Error:", error.message)
+        })*/
+    }
   }
 
-  return (
-    <div className={"home_page"}>
-      <div className="container-fluid banner-background">
+  return (<div className="home_page">
+
+      {/* HOME BANNER PAGE  */}
+      <div className="container-fluid" style={divStyle}>
         <Row className={"pt-5"}>
-          <small className={'text-white text-center'}>DISCOVER THE SPICY MEALS EXPERIENCE, A CULINARY JOURNEY</small>
-          <h1 className={"text-center text-white fw-bold"} style={{ fontSize: "7rem", fontWeight: "600" }}>Spicy
-            Meals</h1>
-          <h2 className={"text-center text-white"}> Let's Enjoy Favorite Restaurant Experience. </h2>
+          <small className={'text-white text-center'}>EMBARK ON A FLAVORFUL ADVENTURE AT ABC RESTAURANT</small>
+          <h1 className={"text-center text-white fw-bold"} style={{ fontSize: "7rem", fontWeight: "600" }}>AB<span style={{color: 'rgb(253, 126, 20)'}}>C</span> Restaurant</h1>
+          <h2 className={"text-center text-white mb-3"}> Your Favorite Place for Every Taste. </h2>
+          <Button
+            className="btn_sch"
+            color="primary"
+            outline
+            onClick={apiHandlerForSearch}
+          >
+            Make a Reservation</Button>
         </Row>
-        <Card className="custom-card">
-          <h2 className={"text-center form_head mt-1"} style={{ fontWeight: 800 }}>Make Reservation</h2>
-          <hr className={'me-2 ms-2'} />
+        {/*<Card className="custom-card">
+          <h2 className={"text-center form_head mt-1"}style={{fontWeight:800}}>Make Reservation</h2><hr className={'me-2 ms-2'}/>
           <CardBody>
             <Form className="form" onSubmit={e => e.preventDefault()}>
               <Row>
                 <Col sm="12" className="mb-2">
-                  <Label className="form-label" style={{ color: '#ecda13' }} for="input-name">
+                  <Label className="form-label" style={{color:'#ecda13'}} for="input-name">
                     Select Your Branch
                   </Label>
                   <Select
@@ -103,8 +116,14 @@ const Home = () => {
                 </Col>
               </Row>
             </Form>
+            <Button
+              className="btn_sch"
+              color="warning"
+              onClick={apiHandlerForSearch}
+            >
+              Make a Reservation</Button>
           </CardBody>
-        </Card>
+        </Card>*/}
       </div>
 
       {/* INTRODUCTION PAGE  */}
@@ -114,7 +133,7 @@ const Home = () => {
 
             <h2 className={"text-start"}><span className="script">Welcome To Spicy Meals!</span><br />
               Who are we?</h2>
-            <img src={logo} alt={"travel logo"} style={{ width: "20vw" }} />
+            <img src={Assets.logo_about} alt={"travel logo"} style={{ width: "20vw" }} />
           </Col>
           <Col md={7} sm={12} lg={7} className={"mt-1"}>
             <div className={"paragraph-wrap  "}>
@@ -151,7 +170,7 @@ const Home = () => {
       {/* MAIN Facilities PAGE  */}
       <div className={" main_category"}>
         <h1 className={"p-4 text-center main_sub_header"}>Explore Our main Facilities</h1>
-        <MultiCarouselSlides isRtl={isRtl} />
+        <SwiperMultiSlides isRtl={isRtl} />
       </div>
 
       {/* Special Offers PAGE  */}
@@ -160,11 +179,10 @@ const Home = () => {
           <h1 className={"pt-4 pb-4 text-center main_sub_header"}>What is Special Offers ?</h1>
           <Col md={5} className={"ps-2 pe-2"}>
 
-            <h3 style={{ color: "#DD673F", fontWeight: 700, fontSize: '26px' }} className={"text-start pb-2 pt-1"}>
+            <h3 style={{color: "#DD673F", fontWeight: 700 , fontSize:'26px'}}className={"text-start pb-2 pt-1"}>
               <span className="script text-dark">Indulge in Our Latest Offers and Flavors!</span></h3><br />
 
-            <p style={{ fontSize: '15px' }} className={'text-dark'}>At Spicy Meals, we are dedicated to providing a
-              dynamic and exciting dining experience with our
+            <p style={{fontSize:'15px'}} className={'text-dark'}>At Spicy Meals, we are dedicated to providing a dynamic and exciting dining experience with our
               ever-changing menu. To keep your dining experience fresh and full of surprises, we update our meal
               offerings weekly. Each week, our chefs curate a selection of new and seasonal dishes to ensure that
               there is always something new and delicious to try.
@@ -180,7 +198,7 @@ const Home = () => {
           </Col>
           <Col md={7}>
             <Col sm="12">
-              <CarouselAutoPlay isRtl={isRtl} />
+              <SwiperAutoplay isRtl={isRtl} />
             </Col>
           </Col>
         </Row>
@@ -231,17 +249,21 @@ const Home = () => {
             </div>
           </Col>
           <Col md={5}>
-            {/*<iframe*/}
-            {/*  src="https://www.google.com/maps/d/embed?mid=1H1ADd1djKllgjsCH1zUtYLqyS8JTDK4&ehbc=2E312F&z=7"*/}
-            {/*  width="100%"*/}
-            {/*  height="550px">*/}
-            {/*</iframe>*/}
+            <iframe
+              src="https://www.google.com/maps/d/embed?mid=1H1ADd1djKllgjsCH1zUtYLqyS8JTDK4&ehbc=2E312F&z=7"
+              width="100%"
+              height="550px">
+            </iframe>
           </Col>
         </Row>
       </div>
-      <Footer />
-    </div>
-  )
+
+
+      {/* FOOTER AND CONTACT PAGE  */}
+      <FooterPage />
+
+
+    </div>)
 }
 
 export default Home
