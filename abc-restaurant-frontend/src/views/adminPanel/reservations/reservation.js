@@ -17,9 +17,7 @@ import {
 } from "reactstrap";
 import moment from "moment"
 import {
-  getAllReservationFromTableType,
-  // getSpecificQueries,
-  // submitQueryForReservation
+  getAllReservationFromTableType, getQueriesById, saveQueryForReservation
 } from "@src/services/reservation";
 import './reservation.scss'
 import { Assets } from "@src/assets/images"
@@ -137,19 +135,18 @@ const Reservation = () => {
 
   const handleRespond = id => {
     setSelectedReservationId(id)
-    // fetchQueries(id)
+    fetchQueries(id)
     toggleModal()
   }
 
-  // const fetchQueries = async id => {
-  //   try {
-  //     const response = await getSpecificQueries(id)
-  //     setQueries(response.data || [])
-  //   } catch (error) {
-  //     console.error("Error fetching queries:", error)
-  //     setQueries([])
-  //   }
-  // }
+  const fetchQueries = async id => {
+      await getQueriesById(id).then(response => {
+        setQueries(response.data || [])
+      }).catch(error => {
+        console.error("Error fetching queries:", error)
+        setQueries([])
+      })
+  }
 
   const handleApprove = id => {
     console.log("Approve button clicked for reservation ID:", id)
@@ -166,18 +163,18 @@ const Reservation = () => {
       userId: userData.id
     }
 
-    // submitQueryForReservation(userDetails)
-    //   .then(response => {
-    //     if (response.success) {
-    //       fetchQueries(selectedReservationId)
-    //       setReplyMessage("")
-    //     } else {
-    //       console.error("Error submitting reply:", response.message)
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.error("Error submitting reply:", error)
-    //   })
+    saveQueryForReservation(userDetails)
+      .then(response => {
+        if (response.success) {
+          fetchQueries(selectedReservationId)
+          setReplyMessage("")
+        } else {
+          console.error("Error submitting reply:", response.message)
+        }
+      })
+      .catch(error => {
+        console.error("Error submitting reply:", error)
+      })
   }
 
   const toggleModal = () => {
