@@ -16,19 +16,19 @@ import VerticalNavMenuItems from "./VerticalNavMenuItems";
 import { hasActiveChild, removeChildren } from "@layouts/utils";
 
 const VerticalNavMenuGroup = ({
-                                item,
-                                groupOpen,
-                                menuHover,
-                                activeItem,
-                                parentItem,
-                                groupActive,
-                                setGroupOpen,
-                                menuCollapsed,
-                                setGroupActive,
-                                currentActiveGroup,
-                                setCurrentActiveGroup,
-                                ...rest
-                              }) => {
+  item,
+  groupOpen,
+  menuHover,
+  activeItem,
+  parentItem,
+  groupActive,
+  setGroupOpen,
+  menuCollapsed,
+  setGroupActive,
+  currentActiveGroup,
+  setCurrentActiveGroup,
+  ...rest
+}) => {
   // ** Hooks
   const { t } = useTranslation();
   const location = useLocation();

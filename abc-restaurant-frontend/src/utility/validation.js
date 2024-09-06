@@ -51,31 +51,31 @@ export const validateUserProfile = (state) => {
     toast.error("Please select a valid restaurant Id")
     return false
   }
-  if (state.name.trim() === "" || !NAME_REGEX.test(state.name)) {
+  if (state.name === null || state.name.trim() === "" || !NAME_REGEX.test(state.name)) {
     toast.error("Please enter valid user name")
     return false
   }
-  if (state.email.trim() === "" || !EMAIL_REGEX.test(state.email)) {
+  if (state.email === null || state.email.trim() === "" || !EMAIL_REGEX.test(state.email)) {
     toast.error("Please enter valid email address")
     return false
   }
-  if (state.password.trim() === "" || !PASSWORD_REGEX.test(state.password)) {
+  if (state.password === null || state.password.trim() === "" || !PASSWORD_REGEX.test(state.password)) {
     toast.error("Please enter valid password")
     return false
   }
-  if (state.nic.trim() === "") {
+  if (state.nic === null || state.nic.trim() === "") {
     toast.error("Please enter valid nic")
     return false
   }
-  if (state.phoneNumber.trim() === "" || !MOBILE_REGEX.test(state.phoneNumber)) {
+  if (state.phoneNumber === null || state.phoneNumber.trim() === "" || !MOBILE_REGEX.test(state.phoneNumber)) {
     toast.error("Please enter valid phone number")
     return false
   }
-  if (state.homeAddress.trim() === "") {
+  if (state.homeAddress === null || state.homeAddress.trim() === "") {
     toast.error("Please enter valid address")
     return false
   }
-  if (!state.status || !state.status.value || state.status.value.trim() === "") {
+  if (state.status === null || !state.status || !state.status.value || state.status.value.trim() === "") {
     toast.error("Please enter valid user status")
     return false
   }
@@ -247,6 +247,39 @@ export const validateFacilityDetails = (form, isEdit) => {
     return false
   }
 
+  return true
+}
+
+export const validateReservationDetails = (state) => {
+  if (state.restaurantId === 0) {
+    toast.error("Please select restaurant")
+    return false
+  }
+
+  if (state.name.trim() === "") {
+    toast.error("Please enter user name")
+    return false
+  }
+
+  if (state.email.trim() === "" || !EMAIL_REGEX.test(state.email)) {
+    toast.error("Please enter valid email")
+    return false
+  }
+
+  if (state.phone.trim() === "" || !MOBILE_REGEX.test(state.phone)) {
+    toast.error("Please enter valid phone number")
+    return false
+  }
+
+  if (state.reservationType.trim() === "") {
+    toast.error("Please select reservation type")
+    return false
+  }
+
+  if (parseInt(state.seats) === 0){
+    toast.error("Please enter number of seats")
+    return false
+  }
   return true
 }
 

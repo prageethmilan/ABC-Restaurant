@@ -29,16 +29,16 @@ const VerticalNavMenuLink = ({ item, activeItem }) => {
         /*eslint-disable */
         {...(item.externalLink === true
           ? {
-            href: item.navLink || "/",
-          }
+              href: item.navLink || "/",
+            }
           : {
-            to: item.navLink || "/",
-            className: ({ isActive }) => {
-              if (isActive && !item.disabled) {
-                return "d-flex align-items-center active";
-              }
-            },
-          })}
+              to: item.navLink || "/",
+              className: ({ isActive }) => {
+                if (isActive && !item.disabled) {
+                  return "d-flex align-items-center active";
+                }
+              },
+            })}
         onClick={(e) => {
           if (
             item.navLink.length === 0 ||

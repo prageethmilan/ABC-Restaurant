@@ -221,7 +221,7 @@ const VerticalLayout = (props) => {
           setMenuCollapsed={setMenuCollapsed}
         />
       ) : null}
-      {/*   <footer
+   {/*   <footer
         className={classnames(
           `footer footer-light ${footerClasses[footerType] || "footer-static"}`,
           {
