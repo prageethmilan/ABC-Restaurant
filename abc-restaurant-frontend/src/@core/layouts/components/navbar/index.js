@@ -107,6 +107,7 @@ const ThemeNavbar = (props) => {
                 </Link>
               </>
             ):(
+              <div className={userStatus === 'ADMIN' || userStatus === 'STAFF' ? 'd-none' : ''}>
               <Link
                 to={SHOP_PATH}
                 className={`top-wrapper ${windowPath === SHOP_PATH ? "top-wrapper-active" : ""}`}
@@ -117,8 +118,10 @@ const ThemeNavbar = (props) => {
                   <p>Explore Meals</p>
                 </div>
               </Link>
+              </div>
             )}
 
+            <div className={userStatus === 'ADMIN' || userStatus === 'STAFF' ? 'd-none' : ''}>
             <Link
               to={userStatus === "CUSTOMER" ? RESERVATION_FORM_PATH : LOGIN_PATH}
               className={`top-wrapper ${windowPath === (userStatus === "CUSTOMER" ? RESERVATION_FORM_PATH : LOGIN_PATH) ? "top-wrapper-active" : ""}`}
@@ -129,6 +132,7 @@ const ThemeNavbar = (props) => {
                   <p>Make Reservation</p>
                 </div>
               </Link>
+          </div>
           </div>
         </Col>
 
