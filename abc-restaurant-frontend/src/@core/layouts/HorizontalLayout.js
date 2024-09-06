@@ -132,7 +132,7 @@ const HorizontalLayout = (props) => {
       >
         {!navbar && (
           <div className="navbar-header d-xl-block d-none">
-            {/*      <ul className="nav navbar-nav">
+      {/*      <ul className="nav navbar-nav">
               <NavItem className={'d-none'}>
                 <Link to="/" className="navbar-brand">
                   <span className="brand-logo">
@@ -155,7 +155,7 @@ const HorizontalLayout = (props) => {
       </Navbar>
       {!isHidden ? (
         <div className="horizontal-menu-wrapper">
-          {/*          <Navbar
+{/*          <Navbar
             tag="div"
             expand="sm"
             light={skin !== "dark"}
@@ -202,7 +202,7 @@ const HorizontalLayout = (props) => {
           setContentWidth={setContentWidth}
         />
       ) : null}
-      {/*      <footer
+{/*      <footer
         className={classnames(
           `footer footer-light ${footerClasses[footerType] || "footer-static"}`,
           {
