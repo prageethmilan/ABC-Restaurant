@@ -246,7 +246,7 @@ const MyReservation = () => {
             queries.map(query => {
               let avatar, name
 
-              if (query.userRole === 'ADMIN' && query.admin) {
+              if (query.userRole === USER_ROLES[2] && query.admin) {
                 avatar = query.admin.img || Assets.avater || "default-admin-img.png"
                 name = query.admin.name || "Admin"
               } else if (query.userRole === USER_ROLES[1] && query.staff) {
@@ -261,7 +261,7 @@ const MyReservation = () => {
               }
 
               return (
-                <div key={query.id} className={`chat-message ${query.userRole.toLowerCase()}`}>
+                <div key={query.id} className={`chat-message ${query.userRole.toLowerCase()}`} style={userData.userRole === query.userRole ? {justifyContent: "flex-end"} : {justifyContent: "flex-start"}}>
                   <div className="message-info">
                     <img src={avatar} alt={`${name} Avatar`} className="avatar" />
                     <div className="message-details" style={{ minWidth: "180px" }}>
