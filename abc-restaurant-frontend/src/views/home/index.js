@@ -141,7 +141,7 @@ const Home = () => {
               <h3 className={""} style={{ color: "#DD673F", fontWeight: 700 }}>Discover the Spicy Foods Experience, A
                 Culinary Journey</h3><br />
 
-              Welcome to Spicy Foods – Where Every Meal is a Celebration! At Spicy Meals, we go beyond merely serving
+              Welcome to ABC Restaurant – Where Every Meal is a Celebration! At ABC Restaurant, we go beyond merely serving
               food we craft experiences that linger in your memory. Our commitment is to be more than just a restaurant
               – we
               want to be a destination where joy, warmth, and deliciousness come together.

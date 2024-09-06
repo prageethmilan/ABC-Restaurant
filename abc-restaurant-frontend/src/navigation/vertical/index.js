@@ -29,7 +29,7 @@ export const allRoutes = [
   },
   {
     id: "customers",
-    title: "Customers",
+    title: "Manage Customers",
     icon: <UserCheck size={25} />,
     navLink: "/adminPanel/customers",
     roles: ["ADMIN"]

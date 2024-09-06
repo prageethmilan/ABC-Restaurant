@@ -6,7 +6,7 @@ import twitter from "./home/twitter-icon.png"
 import whatsapp from "./home/whatsapp-icon.png"
 import linkedin from "./home/linkedin-icon.png"
 import snapchat from "./home/snapchat-icon.png"
-import logo_about from "./home/logo_about.png"
+import logo_about from "../images/logo/logo.png"
 
 import services from "./category/services.jpg"
 

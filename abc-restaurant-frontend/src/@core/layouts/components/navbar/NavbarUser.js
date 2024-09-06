@@ -5,8 +5,8 @@ import React from "react"
 
 const NavbarUser = () => {
   return (<ul className="nav navbar-nav align-items-center ms-auto">
-    <CartDropdown />
-    <UserDropdown />
-  </ul>)
+      <CartDropdown />
+      <UserDropdown />
+    </ul>)
 }
 export default NavbarUser

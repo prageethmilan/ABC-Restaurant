@@ -42,7 +42,7 @@ const ThemeNavbar = (props) => {
 
 
   return (<Fragment>
-      <Row className="bookmark-wrapper d-flex align-items-center" style={{ width: userStatus ? "79vw" : "100vw" }}>
+    <Row className="bookmark-wrapper d-flex align-items-center" style={{ width: userStatus ? "79vw" : "100vw" }}>
         {/*     <Col className="navbar-nav d-xl-none">
           <NavItem className="mobile-menu me-auto">
             <NavLink className="nav-menu-main menu-toggle hidden-xs is-active" onClick={() => setMenuVisibility(true)}>
@@ -60,10 +60,10 @@ const ThemeNavbar = (props) => {
               </span>
               </Link>
             </Col>
-            <Col md={9} style={{ marginTop: "8px" }}>
-              <h2 className="brand-text  m-0 p-0" style={{ color: '#FF9F43', fontWeight:'900'}}>{themeConfig.app.appName}</h2>
-              <h4 className={"m-0 p-0"} style={{ color: 'rgba(47,34,27,0.94)', fontWeight:'600'}}>Restaurant</h4>
-            </Col>
+            {/*<Col md={9} style={{ marginTop: "8px" }}>*/}
+            {/*  <h2 className="brand-text  m-0 p-0" style={{ color: '#FF9F43', fontWeight:'900'}}>{themeConfig.app.appName}</h2>*/}
+            {/*  <h4 className={"m-0 p-0"} style={{ color: 'rgba(47,34,27,0.94)', fontWeight:'600'}}>Restaurant</h4>*/}
+            {/*</Col>*/}
           </Row>
         </Col>
 
@@ -124,11 +124,11 @@ const ThemeNavbar = (props) => {
               className={`top-wrapper ${windowPath === (userStatus === "CUSTOMER" ? RESERVATION_FORM_PATH : LOGIN_PATH) ? "top-wrapper-active" : ""}`}
               onClick={handleAddNewPlaceClick}
             >
-              <div className={"nav_itm"}>
-                <PlusCircle />
-                <p>Make Reservation</p>
-              </div>
-            </Link>
+                <div className={"nav_itm"}>
+                  <PlusCircle />
+                  <p>Make Reservation</p>
+                </div>
+              </Link>
           </div>
         </Col>
 

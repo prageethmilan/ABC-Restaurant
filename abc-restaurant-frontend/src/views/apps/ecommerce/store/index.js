@@ -2,7 +2,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 import { getRandomInt, paginateArray, randomDate, sortCompare, nextWeek, nextDay} from "@src/@fake-db/utils"
-// import { Assets } from "@src/assets/images"
+import { Assets } from "@src/assets/images"
+import { useSelector } from "react-redux";
+import { CART_ITEMS } from "@src/router/RouteConstant";
 
 const data = {
   products: [
@@ -12,7 +14,7 @@ const data = {
       description: 'A pot of freshly brewed tea or coffee, served with a selection of accompaniments including milk, sugar, and lemon.',
       price: 400.0,
       discount: 5.0,
-      // image: Assets.cofee,
+      image: Assets.cofee,
       subCategory: 'TEA_COFFEE',
       mainCategory: 'TEA_TIME',
       mealType: 'SRI_LANKAN',
@@ -27,7 +29,7 @@ const data = {
       description: 'A refreshing drink made with fresh watermelon juice and a hint of lime, perfect for a hot day.',
       price: 600.0,
       discount: 0.0,
-      // image: Assets.watermelon,
+      image: Assets.watermelon,
       subCategory: 'FRESH_JUICE',
       mainCategory: 'BREAKFAST',
       mealType: 'SRI_LANKAN',
@@ -42,7 +44,7 @@ const data = {
       description: 'A savory rice dish cooked with a mix of vegetables, eggs, and a variety of meats, seasoned with a special Mongolian sauce.',
       price: 1400.0,
       discount: 10.0,
-      // image: Assets.mongoliyan,
+      image: Assets.mongoliyan,
       subCategory: 'EXTRA',
       mainCategory: 'DINNER',
       mealType: 'SRI_LANKAN',
@@ -57,7 +59,7 @@ const data = {
       description: 'A delightful mix of fresh seasonal fruits served with a scoop of vanilla ice cream and drizzled with a honey-lime dressing.',
       price: 800.0,
       discount: 5.0,
-      // image: Assets.fruitesalad,
+      image: Assets.fruitesalad,
       subCategory: 'DESSERT',
       mainCategory: 'LUNCH',
       mealType: 'SRI_LANKAN',
@@ -72,7 +74,7 @@ const data = {
       description: 'A delicious sandwich filled with grilled chicken, fresh lettuce, tomatoes, and a creamy mayonnaise sauce, served on a toasted bun.',
       price: 900.0,
       discount: 2.0,
-      // image: Assets.sandwich,
+      image: Assets.sandwich,
       subCategory: 'SANDWICH',
       mainCategory: 'BREAKFAST',
       mealType: 'FRENCH',
@@ -87,7 +89,7 @@ const data = {
       description: 'A classic Italian pasta dish made with tender beef strips, creamy egg-based sauce, parmesan cheese, and a touch of black pepper.',
       price: 1600.0,
       discount: 5.0,
-      // image: Assets.spaghetti,
+      image: Assets.spaghetti,
       subCategory: 'INTERNATIONAL',
       mainCategory: 'LUNCH',
       mealType: 'ITALIAN',
@@ -102,7 +104,7 @@ const data = {
       description: 'A spicy and sour Thai soup with shrimp, mushrooms, and a blend of lemongrass, kaffir lime leaves, galangal, lime juice, fish sauce, and crushed chili peppers.',
       price: 1200.0,
       discount: 8.0,
-      // image: Assets.soup,
+      image: Assets.soup,
       subCategory: 'STARTERS_SOUP',
       mainCategory: 'BREAKFAST',
       mealType: 'FRENCH',
@@ -117,7 +119,7 @@ const data = {
       description: 'Aromatic basmati rice cooked with tender pieces of chicken, flavored with saffron, and a blend of spices, garnished with fried onions and fresh coriander.',
       price: 1800.0,
       discount: 11.0,
-      // image: Assets.biriyani,
+      image: Assets.biriyani,
       subCategory: 'BIRIYANI',
       mainCategory: 'LUNCH',
       mealType: 'INDIAN',
@@ -132,7 +134,7 @@ const data = {
       description: 'Juicy grilled chicken breasts coated in a creamy mushroom sauce, served with a side of sautéed vegetables and mashed potatoes.',
       price: 2000.0,
       discount: 12.0,
-      // image: Assets.chicken,
+      image: Assets.chicken,
       subCategory: 'CHICKEN',
       mainCategory: 'DINNER',
       mealType: 'SRI_LANKAN',
@@ -147,7 +149,7 @@ const data = {
       description: 'A refreshing salad with a mix of seafood including shrimp, squid, and mussels, tossed with fresh herbs, greens, and a tangy dressing.',
       price: 1500.0,
       discount: 6.0,
-      // image: Assets.salad,
+      image: Assets.salad,
       subCategory: 'SALAD',
       mainCategory: 'LUNCH',
       mealType: 'SRI_LANKAN',
@@ -162,7 +164,7 @@ const data = {
       description: 'Succulent pork chops grilled to perfection, served with a smoky BBQ sauce, and accompanied by roasted vegetables and garlic bread.',
       price: 2200.0,
       discount: 15.0,
-      // image: Assets.pork,
+      image: Assets.pork,
       subCategory: 'BBQ',
       mainCategory: 'DINNER',
       mealType: 'SRI_LANKAN',
@@ -173,7 +175,7 @@ const data = {
     }
   ],
   userWishlist: [],
-  userCart: []
+  userCart: localStorage.getItem(CART_ITEMS) ? JSON.parse(localStorage.getItem(CART_ITEMS)) : []
 }
 
 
@@ -255,6 +257,7 @@ export const addToCart = createAsyncThunk('appEcommerce/addToCart', async (id, {
     qty: 1
   })
 
+  localStorage.setItem(CART_ITEMS, JSON.stringify(data.userCart));
   // Dispatch the getProducts action to refresh the product list
   await dispatch(getProducts(getState().ecommerce.params))
 
@@ -306,6 +309,7 @@ export const deleteCartItem = createAsyncThunk('appEcommerce/deleteCartItem', as
     data.userCart.splice(productIndex, 1)
   }
 
+  localStorage.setItem(CART_ITEMS, JSON.stringify(data.userCart));
   // Dispatch the getCartItems action to update the cart items
   dispatch(getCartItems())
 
