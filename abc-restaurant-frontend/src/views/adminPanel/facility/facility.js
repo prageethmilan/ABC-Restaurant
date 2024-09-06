@@ -182,9 +182,8 @@ function Facility() {
   }
 
   const handleAddFacilityClick = () => {
-    setIsEdit(false)
     setShow(true)
-    clearForm()
+    setIsEdit(false)
   }
   const handleEditClick = (byId) => {
     setIsEdit(true)
@@ -459,7 +458,7 @@ function Facility() {
 
           <Row className={'mt-3'}>
             <FacilityTable onEdit={handleEditClick} isRefresh={isRefresh} changeRefresh={() => setIsRefresh(false)}/> {/* Pass handleEditClick */}
-            {facilityModal} {/*model calling place*/}
+            {facilityModal}
           </Row>
         </div>
     </>

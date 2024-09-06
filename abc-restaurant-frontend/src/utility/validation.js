@@ -85,8 +85,8 @@ export const validateUserProfile = (state) => {
 /** Check whether the data value exists or not */
 export const createUser = form => {
   return {
-    id:form.id ?? null,
-    employeeId:form.employeeId ?? null,
+    id:form.id ?? 0,
+    employeeId:form.employeeId ?? 0,
     name: form.name ?? null,
     email: form.email ?? null,
     password: form.password ?? null,

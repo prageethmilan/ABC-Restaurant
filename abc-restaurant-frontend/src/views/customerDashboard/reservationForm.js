@@ -10,6 +10,9 @@ import { validateReservationDetails } from "@src/utility/validation";
 import { saveReservation } from "@src/services/reservation";
 import toast from "react-hot-toast";
 import ReservationTable from "@src/views/customerDashboard/ReservationTable/ReservationTable";
+import MyProfile from "@src/views/customerDashboard/myProfile";
+import { ALL_RESERVATIONS_PATH, MY_PROFILE_PATH } from "@src/router/routes/route-constant";
+import { useNavigate } from "react-router-dom";
 
 const reservationTypeList = [
   { value: "FAMILY_DINING", label: "Family Dining" },
@@ -21,6 +24,7 @@ const reservationTypeList = [
 function ReservationForm() {
 
   const [show, setShow] = useState(true)
+  const navigate = useNavigate()
   const [restaurantList, setRestaurantList] = useState([])
   const [restaurant, setRestaurant] = useState(null)
   const [reservationType, setReservationType] = useState(null)
@@ -115,6 +119,7 @@ function ReservationForm() {
             if (response.success) {
               toast.success("reservation saved successfully")
               clearForm()
+              navigate(ALL_RESERVATIONS_PATH)
               // setIsRefresh(true)
             } else {
               toast.error(response.message)
@@ -131,11 +136,13 @@ function ReservationForm() {
            toggle={() => {
              setShow(!show)
              clearForm()
+             navigate(MY_PROFILE_PATH)
            }}
            className="modal-dialog-centered modal-md">
       <ModalHeader toggle={() => {
         clearForm()
         setShow(!show)
+        navigate(MY_PROFILE_PATH)
       }}>{isEdit ? 'Update Reservation' : 'Make Reservation'}</ModalHeader>
       <ModalBody>
         <Card>
@@ -283,7 +290,7 @@ function ReservationForm() {
 
   return (
     <>
-      <div>
+      {/*<div>
         <Row className="d-flex ">
           <Col md={6}>
             <h1>Reservations</h1>
@@ -300,9 +307,13 @@ function ReservationForm() {
         </Row>
 
         <Row className={'mt-3'}>
-          <ReservationTable /> {/* Pass handleEditClick */}
+          <ReservationTable />  Pass handleEditClick
           {reservationFormModal}
         </Row>
+      </div>*/}
+      <div>
+        <MyProfile />
+        {reservationFormModal}
       </div>
     </>
   )

@@ -38,7 +38,7 @@ const UsersTable = ({onEdit, refresh}) => {
       name: 'Employee Id',
       sortable: false,
       minWidth: '150px',
-      selector: row => row.employeeId ? row.employeeId : "N/A",
+      selector: row => row.employeeId !== 0  ? row.employeeId : "N/A",
     },
     {
       name: 'Name',

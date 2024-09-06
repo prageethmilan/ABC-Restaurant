@@ -35,8 +35,8 @@ function Index() {
   const [isRefresh, setIsRefresh] = useState(false)
 
   const [form, setForm] = useState({
-    id:null,
-    employeeId:null,
+    id: 0,
+    employeeId: 0,
     name:"",
     email: "",
     password: "",
@@ -147,24 +147,24 @@ function Index() {
     setIsEdit(true) // Set to edit mode
     setShow(true)
      findUserById({email})
-        .then(response => {
+        .then(async response => {
           if (response.success) {
             const res = response.data
-
-            setForm({
-              id:res.id,
-              employeeId:res.role === "STAFF" ? res.employeeId : null,
-              name:res.name,
+            await setForm({
+              id: res.id,
+              employeeId: res.role === "STAFF" ? res.employeeId : 0,
+              name: res.name,
               email: res.email,
               password: res.tempPassword,
               nic: res.nic,
               phoneNumber: res.phoneNumber,
               homeAddress: res.homeAddress,
-              role:  res.userRole ? res.userRole === "ADMIN" ? rolesOptions[0] : rolesOptions[1] : null,
-              status:  res.status ? res.status === "ACTIVE" ? statusOptions[0] : statusOptions[1] : null,
+              role: res.userRole ? res.userRole === "ADMIN" ? rolesOptions[0] : rolesOptions[1] : null,
+              status: res.status ? res.status === "ACTIVE" ? statusOptions[0] : statusOptions[1] : null,
               restaurantId: res.userRole === "STAFF" ? restaurantsOptions.find(
                 opt => opt.value === res.restaurantId) : null
             })
+            console.log(form.id);
             // Set enableRestaurant based on role
             setEnableRestaurant(res.userRole === "STAFF")
           } else {
