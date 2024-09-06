@@ -111,7 +111,7 @@ const Cart = props => {
           <div className='item-options text-center'>
             <div className='item-wrapper'>
               <div className="item-cost">
-                <h4 className="item-price">${item.totalPrice}</h4>
+                <h4 className="item-price">Rs. {item.totalPrice}</h4>
                 {item.hasFreeShipping ? (
                   <CardText className="shipping">
                     <Badge color="light-success" pill>
@@ -153,21 +153,7 @@ const Cart = props => {
               <ul className='list-unstyled'>
                 <li className='price-detail'>
                   <div className='detail-title'>Total MRP</div>
-                  <div className='detail-amt'>${calculateTotal()}</div>
-                </li>
-                <li className='price-detail'>
-                  <div className='detail-title'>Bag Discount</div>
-                  <div className='detail-amt discount-amt text-success'>-25$</div>
-                </li>
-                <li className='price-detail'>
-                  <div className='detail-title'>Estimated Tax</div>
-                  <div className='detail-amt'>$1.3</div>
-                </li>
-                <li className='price-detail'>
-                  <div className='detail-title'>EMI Eligibility</div>
-                  <a href='/' className='detail-amt text-primary' onClick={e => e.preventDefault()}>
-                    Details
-                  </a>
+                  <div className='detail-amt'>Rs. {calculateTotal()}</div>
                 </li>
                 <li className='price-detail'>
                   <div className='detail-title'>Delivery Charges</div>
@@ -178,7 +164,7 @@ const Cart = props => {
               <ul className='list-unstyled'>
                 <li className='price-detail'>
                   <div className='detail-title detail-total'>Total</div>
-                  <div className='detail-amt fw-bolder'>${calculateTotal()}</div>
+                  <div className='detail-amt fw-bolder'>Rs. {calculateTotal()}</div>
                 </li>
               </ul>
               <Button
