@@ -1,11 +1,11 @@
 import React from "react"
+import { Button, Col, Form, Input, Row } from "reactstrap";
+import Maintenance from "@src/views/Maintenance";
 
 function Payments() {
   return (
     <div>
-
-      <h1> Payments Manage</h1>
-
+      <Maintenance />
     </div>
   )
 }
