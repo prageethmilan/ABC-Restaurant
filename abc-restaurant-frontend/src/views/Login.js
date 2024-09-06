@@ -53,7 +53,6 @@ const Login = () => {
       setLoading(true)
       loginUser(createLoginUser(form))
         .then(response => {
-          console.log(response);
           if (response.access_token) {
             const { access_token, refresh_token, user } = response
 
@@ -123,10 +122,6 @@ const Login = () => {
                 <div className={"text-center"}>
                   <img src={Assets.logo} alt={"log_img"} width={100} />
                 </div>
-
-                <CardTitle tag="h2" className="fw-bold mb-1">
-                  Welcome to Spicy Meals!
-                </CardTitle>
                 <CardText className="mb-2">
                   Please sign-in to your account and start the adventure
                 </CardText>
@@ -152,9 +147,9 @@ const Login = () => {
                       <Label className="form-label" for="login-password">
                         Password
                       </Label>
-                      <Link to="/forgot-password">
-                        <small className={"text-warning fw-bold"}>Forgot Password?</small>
-                      </Link>
+                      {/*<Link to="/forgot-password">*/}
+                      {/*  <small className={"text-warning fw-bold"}>Forgot Password?</small>*/}
+                      {/*</Link>*/}
                     </div>
                     <InputPasswordToggle
                       className="input-group-merge"
