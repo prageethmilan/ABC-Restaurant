@@ -3,7 +3,6 @@ import { useEffect, Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 
 // ** Product detail components
-import ItemFeatures from './ItemFeatures'
 import ProductDetails from './ProductDetails'
 
 // ** Custom Components

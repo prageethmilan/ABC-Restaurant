@@ -93,7 +93,7 @@ const Product = props => {
           </a>
         </CardText>
         <div className='ecommerce-details-price d-flex flex-wrap mt-1'>
-          <h4 className='item-price me-1'>${data.price}</h4>
+          <h4 className='item-price me-1'>Rs. {data.price}</h4>
           <ul className='unstyled-list list-inline'>
             {new Array(5).fill().map((listItem, index) => {
               return (
@@ -121,7 +121,7 @@ const Product = props => {
             </li>
           ) : null}
           <li>
-            <DollarSign size={19} />
+            {/*<DollarSign size={19} />*/}
             <span>Discount available : <span className={'fw-bold text-danger'}>Rs.{data.discount}</span></span>
           </li>
         </ul>
