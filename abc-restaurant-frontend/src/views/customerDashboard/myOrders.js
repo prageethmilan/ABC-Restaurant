@@ -265,7 +265,7 @@ function MyOrders() {
             }
 
             return (
-              <div key={query.id} className={`chat-message ${query.userRole.toLowerCase()}`}>
+              <div key={query.id} className={`chat-message ${query.userRole.toLowerCase()}`} style={userData.userRole === query.userRole ? {justifyContent: "flex-end"} : {justifyContent: "flex-start"}}>
                 <div className="message-info">
                   <img src={avatar} alt={`${name} Avatar`} className="avatar" />
                   <div className="message-details" style={{ minWidth: "180px" }}>
