@@ -40,3 +40,13 @@ export async function getAllReservationsByReservationType(reservationType) {
   apiObject.urlencoded = false
   return await ApiService.callApi(apiObject)
 }
+
+export async function getAllReservationFromTableType(){
+  const apiObject = {}
+  apiObject.method = "GET"
+  apiObject.authentication = false
+  apiObject.endpoint = `reservation/TABLE`
+  apiObject.multipart = false
+  apiObject.urlencoded = false
+  return await ApiService.callApi(apiObject)
+}

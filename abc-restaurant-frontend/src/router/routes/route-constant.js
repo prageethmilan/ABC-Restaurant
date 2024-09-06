@@ -13,7 +13,7 @@ export const PAYMENTS_PATH = `${ROUTE_PATH}/adminPanel/payments`
 export const REPORTS_PATH = `${ROUTE_PATH}/adminPanel/reports`
 export const REPORTS1_PATH = `${ROUTE_PATH}/adminPanel/reports/1`
 export const REPORTS2_PATH = `${ROUTE_PATH}/adminPanel/reports/2`
-
+export const MANAGE_RESERVATION_PATH = `${ROUTE_PATH}/adminPanel/reservation`
 export const PLACES_PATH_FILTER = `${ROUTE_PATH}/search-places`
 export const CATEGORIES_PATH = `${ROUTE_PATH}/categories`
 export const SERVICES_PATH = `${ROUTE_PATH}/services`

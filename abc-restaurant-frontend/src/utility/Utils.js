@@ -37,3 +37,16 @@ export const selectThemeColors = (theme) => ({
     neutral30: "#ededed" // for input hover border-color
   }
 })
+
+export const getBadgeColor = (status) => {
+  switch (status) {
+    case "APPROVED":
+      return "success"
+    case "DECLINED":
+      return "danger"
+    case "NEW":
+      return "info"
+    default:
+      return "secondary"
+  }
+}

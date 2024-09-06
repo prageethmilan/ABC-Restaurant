@@ -266,18 +266,13 @@ const ReservationTable = () => {
       </Row>
       <div className='react-dataTable'>
         <DataTable
-          noHeader
-          pagination
-          selectableRowsNoSelectAll
-          // expandableRows
           columns={columns}
-          className='react-dataTable'
-          paginationPerPage={7}
-          sortIcon={<ChevronDown size={10} />}
-          paginationDefaultPage={currentPage + 1}
+          data={filteredData}
+          expandableRows
+          expandableRowsComponent={ExpandableTable}
+          pagination
           paginationComponent={CustomPagination}
-          // expandableRowsComponent={ExpandableTable}
-          data={searchValue.length ? filteredData : data}
+          noDataComponent="No data found"
           keyField="uniqueKey"
         />
       </div>
