@@ -1,9 +1,10 @@
 import React from "react"
+import Maintenance from "@src/views/Maintenance";
 
 function MyQueries() {
   return (
     <div>
-      <h1> My Queries </h1>
+      <Maintenance />
     </div>
   )
 }

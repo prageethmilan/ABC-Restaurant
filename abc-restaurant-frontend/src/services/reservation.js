@@ -101,3 +101,13 @@ export async function getAllOrdersByUserId(userId) {
   apiObject.urlencoded = false
   return await ApiService.callApi(apiObject)
 }
+
+export async function getAllReservationsByUserId(userId) {
+  const apiObject = {}
+  apiObject.method = "GET"
+  apiObject.authentication = false
+  apiObject.endpoint = `reservation/order/TABLE/${userId}`
+  apiObject.multipart = false
+  apiObject.urlencoded = false
+  return await ApiService.callApi(apiObject)
+}
