@@ -12,7 +12,7 @@ import {} from "@utils";
 
 // ** Illustrations Imports
 import illustrationsLight from "@src/assets/images/pages/not-authorized.svg";
-import illustrationsDark from "@src/assets/images/pages/not-authorized-dark.svg";
+
 
 // ** Styles
 import "@styles/base/pages/page-misc.scss";
@@ -21,7 +21,7 @@ const NotAuthorized = () => {
   // ** Hooks
   const { skin } = useSkin();
 
-  const source = skin === "dark" ? illustrationsDark : illustrationsLight;
+  const source = skin === "dark" ? illustrationsLight : illustrationsLight;
 
   return (
     <div className="misc-wrapper">
