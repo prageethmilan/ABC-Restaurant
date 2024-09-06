@@ -47,7 +47,7 @@ const BreadCrumbs = (props) => {
   };
 
   return (
-    <div className="content-header row">
+    <div className="content-header row mt-1  ms-1">
       <div className="content-header-left col-md-9 col-12 mb-2">
         <div className="row breadcrumbs-top">
           <div className="col-12">
@@ -69,7 +69,7 @@ const BreadCrumbs = (props) => {
       </div>
       <div className="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
         <div className="breadcrumb-right dropdown">
-          <UncontrolledButtonDropdown>
+          {/*<UncontrolledButtonDropdown>
             <DropdownToggle
               color="primary"
               className="btn-icon btn-round dropdown-toggle"
@@ -94,7 +94,7 @@ const BreadCrumbs = (props) => {
                 <span className="align-middle">Calendar</span>
               </DropdownItem>
             </DropdownMenu>
-          </UncontrolledButtonDropdown>
+          </UncontrolledButtonDropdown>*/}
         </div>
       </div>
     </div>
