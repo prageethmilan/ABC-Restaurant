@@ -17,7 +17,7 @@ import {
 } from "reactstrap";
 import moment from "moment"
 import {
-  getAllReservationFromTableType, getQueriesById, saveQueryForReservation
+  getAllReservationFromTableType, getReservationQueriesById, saveQueryForReservation
 } from "@src/services/reservation";
 import './reservation.scss'
 import { Assets } from "@src/assets/images"
@@ -133,14 +133,14 @@ const Reservation = () => {
     })
   }
 
-  const handleRespond = id => {
+  const handleRespond = async id => {
     setSelectedReservationId(id)
-    fetchQueries(id)
+    await fetchQueries(id)
     toggleModal()
   }
 
   const fetchQueries = async id => {
-      await getQueriesById(id).then(response => {
+      await getReservationQueriesById(id).then(response => {
         setQueries(response.data || [])
       }).catch(error => {
         console.error("Error fetching queries:", error)
@@ -164,9 +164,9 @@ const Reservation = () => {
     }
 
     saveQueryForReservation(userDetails)
-      .then(response => {
+      .then(async response => {
         if (response.success) {
-          fetchQueries(selectedReservationId)
+          await fetchQueries(selectedReservationId)
           setReplyMessage("")
         } else {
           console.error("Error submitting reply:", response.message)
@@ -234,61 +234,13 @@ const Reservation = () => {
     />
   )
 
-  return (
-    <div className="reservation-container">
-      <Card>
-        {/*<CardHeader>*/}
-        {/*  <CardTitle tag="h4">Manage Reservations</CardTitle>*/}
-        {/*  <Input className={'w-50'} type="text" placeholder="Search..." value={searchValue} onChange={handleFilter} />*/}
-        {/*</CardHeader>*/}
-        {/*<DataTable*/}
-        {/*  columns={columns}*/}
-        {/*  data={filteredData}*/}
-        {/*  expandableRows*/}
-        {/*  expandableRowsComponent={ExpandableTable}*/}
-        {/*  pagination*/}
-        {/*  paginationComponent={CustomPagination}*/}
-        {/*  noDataComponent="No data found"*/}
-        {/*  keyField="uniqueKey"*/}
-        {/*/>*/}
-        <CardHeader className='border-bottom'>
-          <CardTitle tag='h4'>Manage Reservations</CardTitle>
-        </CardHeader>
-        <Row className='justify-content-start mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='4' sm='12'>
-            <Label className='me-1' for='search-input-1'>
-              {t('Search')}
-            </Label>
-            <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input-1'
-              value={searchValue}
-              onChange={handleFilter}
-            />
-          </Col>
-        </Row>
-        <div className='react-dataTable'>
-          <DataTable
-            columns={columns}
-            data={filteredData}
-            expandableRows
-            expandableRowsComponent={ExpandableTable}
-            pagination
-            paginationComponent={CustomPagination}
-            // noDataComponent="No data found"
-            keyField="uniqueKey"
-          />
-        </div>
-      </Card>
-
-      <Modal scrollable isOpen={modal} toggle={toggleModal} size="md">
-        <ModalHeader toggle={toggleModal}>Respond to Queries</ModalHeader>
-        <ModalBody>
-          <div className="chat-container">
-            {queries.length !== 0 ? (
-              queries.map(query => {
+  const queryModal = (
+    <Modal scrollable isOpen={modal} toggle={toggleModal} size="md">
+      <ModalHeader toggle={toggleModal}>Respond to Queries</ModalHeader>
+      <ModalBody>
+        <div className="chat-container">
+          {queries.length !== 0 ? (
+            queries.map(query => {
               let avatar, name
 
               if (query.userRole === 'ADMIN' && query.admin) {
@@ -321,23 +273,61 @@ const Reservation = () => {
                   </div>
                 </div>
               )
-              })
-            ) : (
-              <div className={'text-center'}>Not found chat yet!</div>
-            )}
-          </div>
-          <div className="reply-section p-1">
+            })
+          ) : (
+            <div className={'text-center'}>Not found chat yet!</div>
+          )}
+        </div>
+        <div className="reply-section p-1">
+          <Input
+            type="textarea"
+            value={replyMessage}
+            onChange={e => setReplyMessage(e.target.value)}
+            placeholder="Type your reply..."
+            className="reply-input"
+          />
+          <Button color="primary" onClick={handleReplySubmit} className="reply-button">Send</Button>
+        </div>
+      </ModalBody>
+    </Modal>
+  )
+
+  return (
+    <div className="reservation-container">
+      <Card>
+        <CardHeader className='border-bottom'>
+          <CardTitle tag='h4'>Manage Reservations</CardTitle>
+        </CardHeader>
+        <Row className='justify-content-start mx-0'>
+          <Col className='d-flex align-items-center justify-content-end mt-1' md='4' sm='12'>
+            <Label className='me-1' for='search-input-1'>
+              {t('Search')}
+            </Label>
             <Input
-              type="textarea"
-              value={replyMessage}
-              onChange={e => setReplyMessage(e.target.value)}
-              placeholder="Type your reply..."
-              className="reply-input"
+              className='dataTable-filter mb-50'
+              type='text'
+              bsSize='sm'
+              id='search-input-1'
+              value={searchValue}
+              onChange={handleFilter}
             />
-            <Button color="primary" onClick={handleReplySubmit} className="reply-button">Send</Button>
-          </div>
-        </ModalBody>
-      </Modal>
+          </Col>
+        </Row>
+        <div className='react-dataTable'>
+          <DataTable
+            columns={columns}
+            data={filteredData}
+            expandableRows
+            expandableRowsComponent={ExpandableTable}
+            pagination
+            paginationComponent={CustomPagination}
+            // noDataComponent="No data found"
+            keyField="uniqueKey"
+          />
+        </div>
+      </Card>
+
+      {queryModal}
     </div>
   )
 }

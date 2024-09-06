@@ -51,11 +51,31 @@ export async function getAllReservationFromTableType(){
   return await ApiService.callApi(apiObject)
 }
 
-export async function getQueriesById(id) {
+export async function getAllOrdersFromTableType(){
+  const apiObject = {}
+  apiObject.method = "GET"
+  apiObject.authentication = false
+  apiObject.endpoint = `reservation/MEAL`
+  apiObject.multipart = false
+  apiObject.urlencoded = false
+  return await ApiService.callApi(apiObject)
+}
+
+export async function getReservationQueriesById(id) {
   const apiObject = {}
   apiObject.method = "GET"
   apiObject.authentication = false
   apiObject.endpoint = `reservation/TABLE/${id}`
+  apiObject.multipart = false
+  apiObject.urlencoded = false
+  return await ApiService.callApi(apiObject)
+}
+
+export async function getOrderQueriesById(id) {
+  const apiObject = {}
+  apiObject.method = "GET"
+  apiObject.authentication = false
+  apiObject.endpoint = `reservation/MEAL/${id}`
   apiObject.multipart = false
   apiObject.urlencoded = false
   return await ApiService.callApi(apiObject)
