@@ -11,6 +11,7 @@ import {
   Clipboard,
   Server, User, MessageSquare
 } from "react-feather"
+import { USER_ROLES } from "@src/const/const";
 
 export const allRoutes = [
   {
@@ -18,77 +19,77 @@ export const allRoutes = [
     title: "Dashboard",
     icon: <Grid size={25} />,
     navLink: "/dashboard",
-    roles: ["ADMIN", "STAFF"]
+    roles: [USER_ROLES[2], USER_ROLES[1]]
   },
   {
     id: "users",
     title: "Manage Users",
     icon: <Users size={25} />,
     navLink: "/adminPanel/manageUser",
-    roles: ["ADMIN"]
+    roles: [USER_ROLES[2]]
   },
   {
     id: "customers",
     title: "Manage Customers",
     icon: <UserCheck size={25} />,
     navLink: "/adminPanel/customers",
-    roles: ["ADMIN"]
+    roles: [USER_ROLES[2]]
   },
   {
     id: "restaurant",
     title: "Restaurants",
     icon: <Home size={25} />,
     navLink: "/adminPanel/manageRestaurant",
-    roles: ["ADMIN"]
+    roles: [USER_ROLES[2]]
   },
   {
     id: "facility",
     title: "Facilities",
     icon: <CheckSquare size={25} />,
     navLink: "/adminPanel/manageFacility",
-    roles: ["ADMIN"]
+    roles: [USER_ROLES[2]]
   },
   {
     id: "meals",
     title: "Manage Meals",
     icon: <ShoppingBag size={25} />,
     navLink: "/adminPanel/manageMeals",
-    roles: ["ADMIN"]
+    roles: [USER_ROLES[2]]
   },
   {
     id: "queries",
     title: "Manage Queries",
     icon: <Mail size={25} />,
     navLink: "/adminPanel/queries",
-    roles: ["ADMIN"]
+    roles: [USER_ROLES[2]]
   },
   {
     id: "reservations",
     title: "Reservations",
     icon: <Mail size={25} />,
     navLink: "/adminPanel/reservation",
-    roles: ["ADMIN", "STAFF"]
+    roles: [USER_ROLES[2], USER_ROLES[1]]
   },
   {
     id: "orders",
     title: "Manage Orders",
     icon: <Mail size={25} />,
     navLink: "/adminPanel/orders",
-    roles: ["ADMIN", "STAFF"]
+    roles: [USER_ROLES[2], USER_ROLES[1]]
   },
   {
     id: "payments",
     title: "Manage Payments",
     icon: <DollarSign size={25} />,
     navLink: "/adminPanel/payments",
-    roles: ["ADMIN", "STAFF"]
+    roles: [USER_ROLES[2], USER_ROLES[1]]
   },
   {
     id: "reports",
     title: "Manage Reports",
     icon: <Clipboard size={25} />,
     navLink: "/adminPanel/reports",
-    roles: ["ADMIN"]
+    roles: [USER_ROLES[2]]
   },
 
   {
@@ -96,27 +97,27 @@ export const allRoutes = [
     title: "My Profile",
     icon: <User size={25} />,
     navLink: "/my-profile",
-    roles: ["CUSTOMER"]
+    roles: [USER_ROLES[0]]
   },
   {
     id: "my_order",
     title: "My Orders",
     icon: <Clipboard size={25} />,
     navLink: "/my-orders",
-    roles: ["CUSTOMER"]
+    roles: [USER_ROLES[0]]
   },
   {
     id: "my_reservation",
     title: "My Reservations",
     icon: <Server size={25} />,
     navLink: "/reservations",
-    roles: ["CUSTOMER"]
+    roles: [USER_ROLES[0]]
   },
   {
     id: "my_queries",
     title: "My Queries",
     icon: <MessageSquare size={25} />,
     navLink: "/my-queries",
-    roles: ["CUSTOMER"]
+    roles: [USER_ROLES[0]]
   }
 ]

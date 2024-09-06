@@ -24,6 +24,7 @@ import {
 import "./orders.scss"
 import { Assets } from "@src/assets/images"
 import { getBadgeColor, isUserLoggedIn } from "@utils"
+import { USER_ROLES } from "@src/const/const";
 
 const Orders = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -254,10 +255,10 @@ const Orders = () => {
           if (query.userRole === "ADMIN" && query.admin) {
             avatar = query.admin.img || Assets.avater || "default-admin-img.png"
             name = query.admin.name || "Admin"
-          } else if (query.userRole === "STAFF" && query.staff) {
+          } else if (query.userRole === USER_ROLES[1] && query.staff) {
             avatar = query.staff.img || Assets.avater || "default-staff-img.png"
             name = query.staff.name || "Staff"
-          } else if (query.userRole === "CUSTOMER" && query.user) {
+          } else if (query.userRole === USER_ROLES[0] && query.user) {
             avatar = query.user.img || Assets.avater || "default-customer-img.png"
             name = query.user.name || "Customer"
           } else {

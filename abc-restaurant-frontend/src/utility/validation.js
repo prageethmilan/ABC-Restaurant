@@ -1,4 +1,5 @@
 import toast from "react-hot-toast"
+import { USER_ROLES } from "@src/const/const";
 
 export const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/
 export const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -47,7 +48,7 @@ export const validateUserProfile = (state) => {
     return false
   }
 
-  if (state.role.value === 'STAFF' && (!state.restaurantId || !state.restaurantId.value || !state.restaurantId.value.toString().trim())) {
+  if (state.role.value === USER_ROLES[1] && (!state.restaurantId || !state.restaurantId.value || !state.restaurantId.value.toString().trim())) {
     toast.error("Please select a valid restaurant Id")
     return false
   }

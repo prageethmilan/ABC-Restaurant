@@ -13,6 +13,7 @@ import { routePathHandler } from "@store/routePath"
 import { useDispatch, useSelector } from "react-redux"
 import { IS_LOGIN, LOGIN_PATH } from "@src/router/RouteConstant"
 import toast from "react-hot-toast"
+import { USER_ROLES } from "@src/const/const";
 
 
 const ThemeNavbar = (props) => {
@@ -35,7 +36,7 @@ const ThemeNavbar = (props) => {
     if (!userStatus) {
       toast.success("You must register or sign in before making a reservation.")
       navigate(LOGIN_PATH)
-    } else if (userStatus === "CUSTOMER") {
+    } else if (userStatus === USER_ROLES[0]) {
       setWindowPathHandler(RESERVATION_FORM_PATH)
     }
   }
@@ -107,7 +108,7 @@ const ThemeNavbar = (props) => {
                 </Link>
               </>
             ):(
-              <div className={userStatus === 'ADMIN' || userStatus === 'STAFF' ? 'd-none' : ''}>
+              <div className={userStatus === USER_ROLES[2] || userStatus === USER_ROLES[1] ? 'd-none' : ''}>
               <Link
                 to={SHOP_PATH}
                 className={`top-wrapper ${windowPath === SHOP_PATH ? "top-wrapper-active" : ""}`}
@@ -121,10 +122,10 @@ const ThemeNavbar = (props) => {
               </div>
             )}
 
-            <div className={userStatus === 'ADMIN' || userStatus === 'STAFF' ? 'd-none' : ''}>
+            <div className={userStatus === USER_ROLES[2] || userStatus === USER_ROLES[1] ? 'd-none' : ''}>
             <Link
-              to={userStatus === "CUSTOMER" ? RESERVATION_FORM_PATH : LOGIN_PATH}
-              className={`top-wrapper ${windowPath === (userStatus === "CUSTOMER" ? RESERVATION_FORM_PATH : LOGIN_PATH) ? "top-wrapper-active" : ""}`}
+              to={userStatus === USER_ROLES[0] ? RESERVATION_FORM_PATH : LOGIN_PATH}
+              className={`top-wrapper ${windowPath === (userStatus === USER_ROLES[0] ? RESERVATION_FORM_PATH : LOGIN_PATH) ? "top-wrapper-active" : ""}`}
               onClick={handleAddNewPlaceClick}
             >
                 <div className={"nav_itm"}>

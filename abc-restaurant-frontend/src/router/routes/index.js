@@ -15,6 +15,7 @@ import { isObjEmpty } from "@utils"
 import * as constant from "./route-constant"
 import { HOME_PATH, RESERVATION_FORM_PATH } from "./route-constant";
 import * as constants from "@src/router/RouteConstant";
+import { USER_ROLES } from "@src/const/const";
 
 
 const getLayout = {
@@ -26,9 +27,9 @@ const getLayout = {
 let DefaultRoute;
 
 if (localStorage.getItem(constants.IS_LOGIN) !== undefined) {
-  if (localStorage.getItem(constants.IS_LOGIN) === "CUSTOMER") {
+  if (localStorage.getItem(constants.IS_LOGIN) === USER_ROLES[0]) {
     DefaultRoute = constant.MY_PROFILE_PATH
-  } else if (localStorage.getItem(constants.IS_LOGIN) === "ADMIN"){
+  } else if (localStorage.getItem(constants.IS_LOGIN) === USER_ROLES[2]){
     DefaultRoute = constant.ADMIN_DASHBOARD_PATH
   } else {
     DefaultRoute = constant.ADMIN_DASHBOARD_PATH

@@ -91,3 +91,13 @@ export async function saveQueryForReservation(userDetails) {
   apiObject.body = userDetails
   return await ApiService.callApi(apiObject)
 }
+
+export async function getAllOrdersByUserId(userId) {
+  const apiObject = {}
+  apiObject.method = "GET"
+  apiObject.authentication = false
+  apiObject.endpoint = `reservation/order/MEAL/${userId}`
+  apiObject.multipart = false
+  apiObject.urlencoded = false
+  return await ApiService.callApi(apiObject)
+}

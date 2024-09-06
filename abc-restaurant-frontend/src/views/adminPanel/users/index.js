@@ -10,6 +10,7 @@ import SpinnerComponent from "@components/spinner/Fallback-spinner"
 import Breadcrumbs from "@components/breadcrumbs"
 import { UserPlus } from "react-feather"
 import { getAllRestaurantsIds } from "@src/services/restaurants";
+import { USER_ROLES } from "@src/const/const";
 
 
 const rolesOptions = [
@@ -117,10 +118,10 @@ function Index() {
       ...prev,
       role: selectedOption,
       id:0,
-      employeeId: selectedOption.value === "STAFF" ? 0 : null
+      employeeId: selectedOption.value === USER_ROLES[1] ? 0 : null
     }))
 
-    if (selectedOption.value === "STAFF") {
+    if (selectedOption.value === USER_ROLES[1]) {
       setEnableRestaurant(true)
     } else {
       setEnableRestaurant(false)
@@ -152,7 +153,7 @@ function Index() {
             const res = response.data
             await setForm({
               id: res.id,
-              employeeId: res.role === "STAFF" ? res.employeeId : 0,
+              employeeId: res.role === USER_ROLES[1] ? res.employeeId : 0,
               name: res.name,
               email: res.email,
               password: res.tempPassword,
@@ -161,12 +162,12 @@ function Index() {
               homeAddress: res.homeAddress,
               role: res.userRole ? res.userRole === "ADMIN" ? rolesOptions[0] : rolesOptions[1] : null,
               status: res.status ? res.status === "ACTIVE" ? statusOptions[0] : statusOptions[1] : null,
-              restaurantId: res.userRole === "STAFF" ? restaurantsOptions.find(
+              restaurantId: res.userRole === USER_ROLES ? restaurantsOptions.find(
                 opt => opt.value === res.restaurantId) : null
             })
             console.log(form.id);
             // Set enableRestaurant based on role
-            setEnableRestaurant(res.userRole === "STAFF")
+            setEnableRestaurant(res.userRole === USER_ROLES[1])
           } else {
             toast.error("Something went wrong !!")
           }

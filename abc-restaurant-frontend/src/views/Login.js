@@ -23,6 +23,7 @@ import SpinnerComponent from "@components/spinner/Fallback-spinner"
 import toast from "react-hot-toast"
 import { loginUser } from "@src/services/auth"
 import { LOGIN_PATH } from "@src/router/RouteConstant"
+import { USER_ROLES } from "@src/const/const";
 
 
 const Login = () => {
@@ -63,12 +64,12 @@ const Login = () => {
               localStorage.setItem(constants.IS_LOGIN, user?.userRole)
 
               switch (user.userRole) {
-                case "CUSTOMER":
+                case USER_ROLES[0]:
                   navigate(RESERVATION_FORM_PATH)
                   toast.success("Login Successfully ...")
                   break
 
-                case "STAFF":
+                case USER_ROLES[1]:
                   navigate(ADMIN_DASHBOARD_PATH)
                   toast.success("Login Successfully ...")
                   break
