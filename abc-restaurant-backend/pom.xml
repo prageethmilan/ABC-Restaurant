@@ -196,6 +196,21 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>5.2.7.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.7.1</version> <!-- or the latest version -->
+			<scope>test</scope>
+		</dependency>
+
+		<!-- JUnit Platform Launcher -->
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>1.7.1</version> <!-- or the latest version -->
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
