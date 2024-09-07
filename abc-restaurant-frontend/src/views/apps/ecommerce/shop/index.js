@@ -51,7 +51,7 @@ const Shop = () => {
         setSidebarOpen={setSidebarOpen}
         deleteCartItem={deleteCartItem}
       />
-      <Sidebar sidebarOpen={sidebarOpen} />
+      {/*<Sidebar sidebarOpen={sidebarOpen} />*/}
     </Fragment>
   )
 }
