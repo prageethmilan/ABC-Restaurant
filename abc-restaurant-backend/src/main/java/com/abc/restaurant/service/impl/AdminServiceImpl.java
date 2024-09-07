@@ -9,11 +9,13 @@ import com.abc.restaurant.enums.CommonStatus;
 import com.abc.restaurant.enums.UserRole;
 import com.abc.restaurant.enums.UserStatus;
 import com.abc.restaurant.exception.ApplicationException;
+import com.abc.restaurant.exception.UserException;
 import com.abc.restaurant.repository.AdminRepo;
 import com.abc.restaurant.repository.RestaurantRepo;
 import com.abc.restaurant.repository.StaffRepo;
 import com.abc.restaurant.repository.UserRepo;
 import com.abc.restaurant.service.AdminService;
+import com.abc.restaurant.util.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+import static com.abc.restaurant.constant.Constants.INVALID;
+
 @Service
 @Transactional
 @Log4j2
@@ -30,6 +34,7 @@ import java.util.*;
 public class AdminServiceImpl implements AdminService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final Validator validator;
 
     @Autowired
     private AdminRepo adminRepo;
@@ -44,10 +49,15 @@ public class AdminServiceImpl implements AdminService {
     private RestaurantRepo restaurantRepo;
 
     @Override
-    public void saveAdmin(SaveAdminRequestDTO saveAdminRequestDTO) throws ApplicationException {
+    public void saveAdmin(SaveAdminRequestDTO saveAdminRequestDTO) throws ApplicationException, UserException {
         try {
             if (saveAdminRequestDTO.getId() == 0) {
                 System.out.println(saveAdminRequestDTO.toString());
+                if (saveAdminRequestDTO.getEmail() == null || saveAdminRequestDTO.getEmail().isEmpty() || !validator.isValidEmail(saveAdminRequestDTO.getEmail()))
+                    throw new UserException(INVALID, false, "Please enter a valid email address.");
+
+                if (saveAdminRequestDTO.getPassword() == null || saveAdminRequestDTO.getPassword().isEmpty() || !validator.isValidPassword(saveAdminRequestDTO.getPassword()))
+                    throw new UserException(INVALID, false, "Password must be at least 8 characters long and contain at least one number, one uppercase letter, one lowercase letter, and one special character (e.g., !@#$%^&*).");
                 validateUniqueEmail(saveAdminRequestDTO.getEmail());
 
                 switch (saveAdminRequestDTO.getRole()) {
@@ -141,6 +151,8 @@ public class AdminServiceImpl implements AdminService {
         } catch (Exception e) {
             throw e;
         } catch (ApplicationException e) {
+            throw e;
+        } catch (UserException e) {
             throw e;
         }
     }
