@@ -82,6 +82,8 @@
     overflow-y: auto;
 
     .chat-container {
+      height: 370px;
+      overflow-y: scroll;
       .chat-message {
         display: flex;
         align-items: flex-start;
