@@ -83,12 +83,14 @@ const Orders = () => {
     {
       name: "Actions",
       allowOverflow: true,
-      minWidth: "300px",
+      minWidth: "350px",
       cell: row => (
         <div>
           <Button color="primary" size="sm" onClick={() => handleRespond(row.reservation.id)}>Respond</Button>
           <Button color="success" size="sm" onClick={() => handleApprove(row.reservation.id)}
                   className="ms-2">Approve</Button>
+          <Button color="danger" size="sm" onClick={() => handleApprove(row.reservation.id)}
+                  className="ms-2">Reject</Button>
         </div>
       )
     }

@@ -1,14 +1,12 @@
-import React from "react"
 import Maintenance from "@src/views/Maintenance";
+import React from "react";
 
-function Reports() {
+const Queries = () => {
   return (
     <div>
-
       <Maintenance />
-
     </div>
   )
 }
 
-export default Reports
+export default Queries

@@ -62,6 +62,7 @@ const AdminUsersManage = lazy(() => import("../../views/adminPanel/users/index")
 const Customers = lazy(() => import("../../views/adminPanel/customers/customer"))
 const AdminPaymentsManage = lazy(() => import("../../views/adminPanel/payments"))
 const AdminReportsManage = lazy(() => import("../../views/adminPanel/reports"))
+const AdminQueries = lazy(() => import("../../views/adminPanel/queries/queries"))
 const AdminReservations = lazy(() => import("../../views/adminPanel/reservations/reservation"))
 const AdminOrders = lazy(() => import("../../views/adminPanel/orders/orders"))
 
@@ -231,7 +232,7 @@ const Routes = [
   },
   {
     path: constant.QUERIES_PATH,
-    element: <AdminReservations />,
+    element: <AdminQueries />,
     meta: {
       layout: "vertical"
     }

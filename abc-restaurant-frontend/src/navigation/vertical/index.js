@@ -9,8 +9,8 @@ import {
   Mail,
   DollarSign,
   Clipboard,
-  Server, User, MessageSquare
-} from "react-feather"
+  Server, User, MessageSquare, List
+} from "react-feather";
 import { USER_ROLES } from "@src/const/const";
 
 export const allRoutes = [
@@ -59,21 +59,21 @@ export const allRoutes = [
   {
     id: "queries",
     title: "Manage Queries",
-    icon: <Mail size={25} />,
+    icon: <MessageSquare size={25} />,
     navLink: "/adminPanel/queries",
     roles: [USER_ROLES[2]]
   },
   {
     id: "reservations",
     title: "Reservations",
-    icon: <Mail size={25} />,
+    icon: <Server size={25} />,
     navLink: "/adminPanel/reservation",
     roles: [USER_ROLES[2], USER_ROLES[1]]
   },
   {
     id: "orders",
     title: "Manage Orders",
-    icon: <Mail size={25} />,
+    icon: <Clipboard size={25} />,
     navLink: "/adminPanel/orders",
     roles: [USER_ROLES[2], USER_ROLES[1]]
   },
@@ -87,7 +87,7 @@ export const allRoutes = [
   {
     id: "reports",
     title: "Manage Reports",
-    icon: <Clipboard size={25} />,
+    icon: <List size={25} />,
     navLink: "/adminPanel/reports",
     roles: [USER_ROLES[2]]
   },
