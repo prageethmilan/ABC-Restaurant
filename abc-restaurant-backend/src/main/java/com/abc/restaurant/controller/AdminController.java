@@ -2,6 +2,7 @@ package com.abc.restaurant.controller;
 
 import com.abc.restaurant.dto.request.SaveAdminRequestDTO;
 import com.abc.restaurant.exception.ApplicationException;
+import com.abc.restaurant.exception.UserException;
 import com.abc.restaurant.service.AdminService;
 import com.abc.restaurant.util.common.CommonResponseUtil;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,15 @@ public class AdminController {
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
         } catch (ApplicationException e) {
+            return new ResponseEntity<>(
+                    CommonResponseUtil.builder()
+                            .success(e.isSuccess())
+                            .message(e.getMessage())
+                            .data(null)
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (UserException e) {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(e.isSuccess())
