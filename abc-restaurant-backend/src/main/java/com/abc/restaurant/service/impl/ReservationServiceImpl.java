@@ -14,6 +14,8 @@ import com.abc.restaurant.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +33,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ReservationServiceImpl implements ReservationService {
 
+    private static final Logger log = LoggerFactory.getLogger(ReservationServiceImpl.class);
     @Autowired
     private UserRepo userRepo;
     @Autowired
@@ -144,8 +147,8 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void saveMenuItemOrder(MenuItemOrderRequestDTO menuItemOrderRequestDTO) {
         try{
-            String authentication = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            Optional<User> customer = userRepo.findByEmail(authentication);
+
+            Optional<User> customer = userRepo.findByEmail(menuItemOrderRequestDTO.getUserEmail());
 
             if (!customer.isPresent() || !customer.get().getUserStatus().equals(UserStatus.ACTIVE)){
                 throw new ApplicationException(200, false, "Customer not found!");

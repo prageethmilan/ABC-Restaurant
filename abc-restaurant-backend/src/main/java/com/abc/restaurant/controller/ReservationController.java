@@ -34,7 +34,7 @@ public class ReservationController {
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()
                             .success(true)
-                            .message("")
+                            .message("Table reservation saved successfully.")
                             .data(reservationService.saveTableReservation(tableReservationRequestDTO))
                             .build(),
                     HttpStatus.OK

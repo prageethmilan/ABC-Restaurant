@@ -13,6 +13,8 @@ import com.abc.restaurant.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,7 @@ import java.util.Optional;
 @Transactional
 public class MenuServiceImpl implements MenuService {
 
+    private static final Logger log = LoggerFactory.getLogger(MenuServiceImpl.class);
     @Autowired
     private MenuRepo menuRepo;
 
@@ -46,14 +49,16 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public void saveMenuItem(SaveMenuItemRequestDTO saveMenuItemRequestDTO) throws IOException, ApplicationException {
         try {
+
             Optional<Restaurant> restaurant = restaurantRepo.findById(saveMenuItemRequestDTO.getRestaurantId());
+
             if (!restaurant.isPresent() || restaurant.get().getStatus().equals(CommonStatus.DELETED)){
                 throw new ApplicationException(200, false, "Restaurant not found");
             }
 
             String fileUrl;
 
-            if (!saveMenuItemRequestDTO.getImg().isEmpty() && saveMenuItemRequestDTO.getImg() != null){
+            if (saveMenuItemRequestDTO.getImg() != null){
                 String projectPath = String.valueOf(new File("E:\\Github Projects\\ABC-Restaurant\\abc-restaurant-frontend\\savedImages"));
                 File uploadsDir = new File(projectPath + "\\MenuItems");
                 uploadsDir.mkdir();

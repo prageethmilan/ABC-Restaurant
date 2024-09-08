@@ -12,6 +12,7 @@ import java.util.ArrayList;
 @Builder
 @ToString
 public class MenuItemOrderRequestDTO {
+    private String userEmail;
     private Long restaurantId;
     private boolean isDiffAddress;
     private MenuOrderType orderType;

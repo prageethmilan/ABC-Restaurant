@@ -41,7 +41,7 @@ public class MenuController {
         );
     }
 
-    @PostMapping(value = "/product", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/product", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CommonResponseUtil> saveMenuItem(@ModelAttribute SaveMenuItemRequestDTO saveMenuItemRequestDTO) throws IOException {
         try {
             menuService.saveMenuItem(saveMenuItemRequestDTO);
