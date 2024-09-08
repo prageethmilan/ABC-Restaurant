@@ -44,6 +44,7 @@ public class MenuController {
     @PostMapping(value = "/product", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CommonResponseUtil> saveMenuItem(@ModelAttribute SaveMenuItemRequestDTO saveMenuItemRequestDTO) throws IOException {
         try {
+            System.out.println(saveMenuItemRequestDTO.toString());
             menuService.saveMenuItem(saveMenuItemRequestDTO);
             return new ResponseEntity<>(
                     CommonResponseUtil.builder()

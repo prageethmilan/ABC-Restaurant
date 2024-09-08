@@ -13,10 +13,10 @@ import java.util.Date;
 @Data
 @Builder
 @ToString
-public class MenuItemResponseDTO {
+public class MenuItemResDTO {
 
     private Long id;
-    private Long restaurantId;
+    private RestaurantResponseDTO restaurant;
     private String name;
     private String image;
     private String description;

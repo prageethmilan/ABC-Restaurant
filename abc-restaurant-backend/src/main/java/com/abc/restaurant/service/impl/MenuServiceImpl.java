@@ -2,7 +2,9 @@ package com.abc.restaurant.service.impl;
 
 import com.abc.restaurant.dto.request.SaveMenuItemRequestDTO;
 import com.abc.restaurant.dto.response.MenuItemCommonResponseDTO;
+import com.abc.restaurant.dto.response.MenuItemResDTO;
 import com.abc.restaurant.dto.response.MenuItemResponseDTO;
+import com.abc.restaurant.dto.response.RestaurantResponseDTO;
 import com.abc.restaurant.entity.MenuItem;
 import com.abc.restaurant.entity.Restaurant;
 import com.abc.restaurant.enums.CommonStatus;
@@ -21,10 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -42,8 +41,49 @@ public class MenuServiceImpl implements MenuService {
     private RestaurantRepo restaurantRepo;
 
     @Override
-    public List<MenuItemResponseDTO> getAllMenus() {
-        return modelMapper.map(menuRepo.findAll(), new TypeToken<List<MenuItemResponseDTO>>(){}.getType());
+    public List<MenuItemResDTO> getAllMenus() {
+        List<MenuItemResponseDTO> itemList = modelMapper.map(menuRepo.findAll(), new TypeToken<List<MenuItemResponseDTO>>(){}.getType());
+
+        List<MenuItemResDTO> menuItemResDTOS = new ArrayList<>();
+
+        itemList.forEach(item -> {
+            RestaurantResponseDTO restaurantResponseDTO = null;
+            if (item.getRestaurantId() != 0) {
+                Optional<Restaurant> restaurant = restaurantRepo.findById(item.getRestaurantId());
+                if (restaurant.get().getStatus().equals(CommonStatus.DELETED)) {
+                    try {
+                        throw new ApplicationException(200, false,"Restaurant not found");
+                    } catch (ApplicationException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                restaurantResponseDTO = RestaurantResponseDTO.builder()
+                        .id(restaurant.get().getId())
+                        .name(restaurant.get().getName())
+                        .build();
+            }
+            menuItemResDTOS.add(
+                    MenuItemResDTO.builder()
+                            .id(item.getId())
+                            .restaurant(restaurantResponseDTO)
+                            .name(item.getName())
+                            .image(item.getImage())
+                            .description(item.getDescription())
+                            .price(item.getPrice())
+                            .qty(item.getQty())
+                            .discount(item.getDiscount())
+                            .rating(item.getRating())
+                            .subCategory(item.getSubCategory())
+                            .mainCategory(item.getMainCategory())
+                            .menuType(item.getMenuType())
+                            .status(item.getStatus())
+                            .createdDate(item.getCreatedDate())
+                            .updatedDate(item.getUpdatedDate())
+                            .build()
+            );
+        });
+
+        return menuItemResDTOS;
     }
 
     @Override
@@ -63,7 +103,7 @@ public class MenuServiceImpl implements MenuService {
                 File uploadsDir = new File(projectPath + "\\MenuItems");
                 uploadsDir.mkdir();
                 saveMenuItemRequestDTO.getImg().transferTo(new File(uploadsDir.getAbsolutePath() + "\\" + saveMenuItemRequestDTO.getImg().getOriginalFilename()));
-                fileUrl = projectPath + "\\MenuItems\\" + saveMenuItemRequestDTO.getImg().getOriginalFilename().replace("", "_") + "_" + new Date().getTime();
+                fileUrl = projectPath + "\\MenuItems\\" + saveMenuItemRequestDTO.getImg().getOriginalFilename();
             } else {
                 fileUrl = null;
             }

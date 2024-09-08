@@ -1,6 +1,7 @@
 package com.abc.restaurant.service;
 
 import com.abc.restaurant.dto.request.SaveMenuItemRequestDTO;
+import com.abc.restaurant.dto.response.MenuItemResDTO;
 import com.abc.restaurant.dto.response.MenuItemResponseDTO;
 import com.abc.restaurant.exception.ApplicationException;
 
@@ -8,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface MenuService {
-    List<MenuItemResponseDTO> getAllMenus();
+    List<MenuItemResDTO> getAllMenus();
 
     void saveMenuItem(SaveMenuItemRequestDTO saveMenuItemRequestDTO) throws IOException, ApplicationException;
 

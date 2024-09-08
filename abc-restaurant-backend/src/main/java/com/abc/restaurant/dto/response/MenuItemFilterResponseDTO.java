@@ -13,5 +13,5 @@ import java.util.List;
 public class MenuItemFilterResponseDTO {
 
     private Long restaurantId;
-    private List<MenuItemResponseDTO> meals = new ArrayList<>();
+    private List<MenuItemResDTO> meals = new ArrayList<>();
 }
