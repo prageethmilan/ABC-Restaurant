@@ -40,7 +40,7 @@ const subCategoryOptions = [
 ]
 
 const mealTypeOptions = [
-  { value: "SRI_LANKAN", label: "Sri Lankan" },
+  { value: "SRI_LANKA", label: "Sri Lankan" },
   { value: "INDIAN", label: "Indian" },
   { value: "FRENCH", label: "French" },
   { value: "ITALIAN", label: "Italian" }
@@ -60,6 +60,7 @@ function Meals() {
   const [isEdit, setIsEdit] = useState(false)
   const [featuredImg, setFeaturedImg] = useState(Assets.emptyImg)
   const [restaurantsOptions, setRestaurantsOptions] = useState([])
+  const [isRefresh,setIsRefresh] = useState(false)
   const [form, setForm] = useState({
     id:0,
     name: "",
@@ -129,6 +130,7 @@ function Meals() {
   }
 
   const clearForm = () => {
+    setShow(false)
     setForm({
       id:0,
       name: "",
@@ -152,7 +154,7 @@ function Meals() {
     name: form.name ?? null,
     mainCategory: form.mainCategory?.value ?? null,
     subCategory: form.subCategory?.value ?? null,
-    mealType: form.mealType?.value ?? null,
+    menuType: form.mealType?.value ?? null,
     price: form.price ?? 0,
     discount: form.discount ?? 0,
     status: form.status?.value ?? null,
@@ -163,14 +165,12 @@ function Meals() {
 
   const apiHandler = () => {
     if (validateMealsDetails(form, isEdit)) {
-      setLoading(true)
-
       addNewMeal(createNewMeal(form))
         .then((response) => {
           if (response.success) {
             toast.success(response.message)
             clearForm()
-            setShow(false)
+            setIsRefresh(true)
           } else {
             toast.error(response.message)
           }
@@ -178,16 +178,14 @@ function Meals() {
         .catch((error) => {
           console.error("API Request Error:", error.message)
         })
-        .finally(() => {
-          setLoading(false)
-        })
+
     }
   }
 
   const handleAddMealClick = () => {
     setIsEdit(false)  // Ensure it's in save mode
     setShow(true)
-    clearForm()
+    // clearForm()
   }
 
   const handleEditClick = (byId) => {
@@ -412,9 +410,6 @@ function Meals() {
 
   return (
     <>
-      {loading === true ? (
-        <SpinnerComponent />
-      ) : (
         <div>
           <Row className="d-flex ">
             <Col md={6} cla>
@@ -432,10 +427,10 @@ function Meals() {
           </Row>
 
           <Row className={'mt-3'}>
-            <MealTable onEdit={handleEditClick} /> {/* Pass handleEditClick */}
+            <MealTable onEdit={handleEditClick} isRefresh={isRefresh} changeRefresh={() => setIsRefresh(false)}/> {/* Pass handleEditClick */}
             {mealModal} {/*model calling place*/}
           </Row>
-        </div>)}
+        </div>
     </>
   )
 }

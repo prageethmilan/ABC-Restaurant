@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import DataTable from "react-data-table-component";
 import moment from "moment/moment";
-import { isUserLoggedIn } from "@utils";
+import { isUserLoggedIn, getBadgeColor } from "@utils";
 import {
   getAllOrdersByUserId,
   getAllOrdersFromTableType,
@@ -25,6 +25,7 @@ import {
 import ReactPaginate from "react-paginate";
 import { Assets } from "@src/assets/images";
 import { USER_ROLES } from "@src/const/const";
+import './orders.scss'
 
 function MyOrders() {
   const [filteredData, setFilteredData] = useState([])
@@ -62,7 +63,7 @@ function MyOrders() {
       selector: row => row.reservation.total,
       sortable: true,
       minWidth: "120px",
-      cell: row => `$${row.reservation.total.toFixed(2)}`
+      cell: row => `Rs. ${row.reservation.total.toFixed(2)}`
     },
     {
       name: "Created Date",
@@ -77,7 +78,7 @@ function MyOrders() {
       sortable: true,
       minWidth: "160px",
       cell: row => (
-        <Badge color={getStatusBadgeColor(row.reservation.operationalStatus)} className="badge-glow">
+        <Badge color={getBadgeColor(row.reservation.operationalStatus)} className="badge-glow">
           {row.reservation.operationalStatus}
         </Badge>
       )
@@ -218,7 +219,7 @@ function MyOrders() {
         </Col>
         <Col md={6}>
           <p><strong>Meal Order Type: </strong>{data.reservation.mealOrderType}</p>
-          <p><strong>Total Amount: </strong>${data.reservation.total.toFixed(2)}</p>
+          <p><strong>Total Amount: </strong>Rs. {data.reservation.total.toFixed(2)}</p>
         </Col>
       </Row>
       <Row>

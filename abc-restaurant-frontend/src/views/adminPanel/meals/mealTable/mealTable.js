@@ -28,7 +28,7 @@ const formatMealType = (mealType) => {
 }
 
 
-const MealTable = ({onEdit}) => {
+const MealTable = ({onEdit, isRefresh, changeRefresh}) => {
   // ** State
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
@@ -40,63 +40,69 @@ const MealTable = ({onEdit}) => {
   const columns = [
     {
       name: 'Id',
-      sortable: true,
+      sortable: false,
       minWidth: '150px',
       selector: row => row.id,
       omit:true
     },
     {
       name: 'Description',
-      sortable: true,
+      sortable: false,
       minWidth: '150px',
       selector: row => row.description,
       omit:true
     },
     {
       name: 'Meal Name',
-      sortable: true,
+      sortable: false,
       minWidth: '220px',
       selector: row => row.name
     },
     {
       name: 'Price',
-      sortable: true,
+      sortable: false,
       minWidth: '80px',
       selector: row => row.price
     },
     {
       name: 'Discount',
-      sortable: true,
-      minWidth: '60px',
+      sortable: false,
+      minWidth: '120px',
       selector: row => row.discount
     },
     {
       name: 'Meal Type',
-      sortable: true,
+      sortable: false,
       minWidth: '150px',
-      selector: row => formatMealType(row.mealType)
+      selector: row => formatMealType(row.menuType)
     },
     {
       name: 'Main Category',
-      sortable: true,
+      sortable: false,
       minWidth: '150px',
       selector: row => formatMealType(row.mainCategory)
     },
     {
       name: 'Sub Category',
-      sortable: true,
+      sortable: false,
       minWidth: '150px',
       selector: row => formatMealType(row.subCategory)
     },
     {
       name: 'Rating',
-      sortable: true,
+      sortable: false,
       minWidth: '100px',
       selector: row => formatMealType(row.rating)
     },
     {
+      name: 'Restaurant',
+      sortable: false,
+      minWidth: '200px',
+      selector: row => row.restaurant.name
+    },
+    {
       name: 'Status',
-      sortable: true,
+      sortable: false,
       minWidth: '80px',
       selector: row => row.status,
       cell: row => {
@@ -122,13 +128,19 @@ const MealTable = ({onEdit}) => {
   ]
 
   useEffect(() => {
-    getAllMelsProducts()
+    getAllMealsProducts()
   }, [])
 
-  const getAllMelsProducts = () => {
+  useEffect(() => {
+    if (isRefresh){
+      getAllMealsProducts()
+      changeRefresh()
+    }
+  }, [isRefresh])
+
+  const getAllMealsProducts = () => {
     getAllMeals().then(async response => {
-      console.log(response)
-      const data = response.meals.map((item, index) => ({
+      const data = response.data.meals.map((item, index) => ({
         ...item,
         uniqueKey: `${item.id}-${index}` // Combine `id` and `index` to generate a unique key
       }))

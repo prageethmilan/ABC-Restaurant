@@ -159,8 +159,6 @@ const FacilityTable = ({onEdit, isRefresh, changeRefresh}) => {
     fetchAllFacilities()
   }, [])
 
-  console.log(isRefresh);
-
   useEffect(() => {
     if (isRefresh){
       fetchAllFacilities()

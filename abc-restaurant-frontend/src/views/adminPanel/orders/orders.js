@@ -60,7 +60,7 @@ const Orders = () => {
       selector: row => row.reservation.total,
       sortable: true,
       minWidth: "120px",
-      cell: row => `$${row.reservation.total.toFixed(2)}`
+      cell: row => `Rs. ${row.reservation.total.toFixed(2)}`
     },
     {
       name: "Created Date",
@@ -75,7 +75,7 @@ const Orders = () => {
       sortable: true,
       minWidth: "160px",
       cell: row => (
-        <Badge color={getStatusBadgeColor(row.reservation.operationalStatus)} className="badge-glow">
+        <Badge color={getBadgeColor(row.reservation.operationalStatus)} className="badge-glow">
           {row.reservation.operationalStatus}
         </Badge>
       )
@@ -105,7 +105,7 @@ const Orders = () => {
         </Col>
         <Col md={6}>
           <p><strong>Meal Order Type: </strong>{data.reservation.mealOrderType}</p>
-          <p><strong>Total Amount: </strong>${data.reservation.total.toFixed(2)}</p>
+          <p><strong>Total Amount: </strong>Rs. {data.reservation.total.toFixed(2)}</p>
         </Col>
       </Row>
       <Row>
