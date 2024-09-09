@@ -219,7 +219,7 @@ const Home = () => {
       {/* MAP LOCATION PAGE  */}
       <div className={"container-fluid map_page bg-white mt-5 pt-5"}>
         <Row>
-          <Col md={7} className={"map_heading d-flex justify-content-center align-items-start"}>
+          <Col className={"map_heading d-flex justify-content-center align-items-start"}>
             <div>
               <Row>
                 <Col>
@@ -248,13 +248,13 @@ const Home = () => {
               </Row>
             </div>
           </Col>
-          <Col md={5}>
-            <iframe
-              src="https://www.google.com/maps/d/embed?mid=1H1ADd1djKllgjsCH1zUtYLqyS8JTDK4&ehbc=2E312F&z=7"
-              width="100%"
-              height="550px">
-            </iframe>
-          </Col>
+          {/*<Col>*/}
+          {/*  <iframe*/}
+          {/*    src="https://www.google.com/maps/d/embed?mid=1H1ADd1djKllgjsCH1zUtYLqyS8JTDK4&ehbc=2E312F&z=7"*/}
+          {/*    width="100%"*/}
+          {/*    height="550px">*/}
+          {/*  </iframe>*/}
+          {/*</Col>*/}
         </Row>
       </div>
 

@@ -104,7 +104,7 @@ const Login = () => {
   }
 
   return (<>
-      {loading === true ? (<SpinnerComponent />) : (<div className="auth-wrapper auth-cover">
+      <div className="auth-wrapper auth-cover">
           <Row className="auth-inner m-0">
             <Col className="d-none d-lg-flex align-items-center m-0 p-0" lg="8" sm="12">
               <div className="w-100 d-lg-flex align-items-center justify-content-center">
@@ -185,7 +185,7 @@ const Login = () => {
               </Col>
             </Col>
           </Row>
-        </div>)}
+        </div>
     </>)
 }
 
